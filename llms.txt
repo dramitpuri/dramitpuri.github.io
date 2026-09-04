@@ -1,0 +1,46 @@
+# Dr. Amit Puri Foundation
+
+> Amplifying Human Ingenuity in the Age of AI. Our foundation cultivates human ingenuity alongside AI — building programs, partnerships, and practices that strengthen foundational and advanced human skills across the arts, medicine, education, and physical AI.
+
+## Core Information
+- **Domain:** [https://www.dramitpurifoundation.org](https://www.dramitpurifoundation.org)
+- **Canonical Brand Name:** Dr. Amit Puri Foundation
+- **Alternate Brand Identifiers:** dramitpurifoundation, Dr Amit Puri Foundation, DAPF, dramitpurifoundation.org
+- **Established:** 2026
+- **Founder:** Dr. Amit Puri ([https://www.amitpuri.com](https://www.amitpuri.com))
+- **Email:** info@amitpuri.com
+- **Full LLM Context:** [https://www.dramitpurifoundation.org/llms-full.txt](https://www.dramitpurifoundation.org/llms-full.txt)
+- **Sitemap:** [https://www.dramitpurifoundation.org/sitemap.xml](https://www.dramitpurifoundation.org/sitemap.xml)
+
+## Main Pages
+- **Home:** [https://www.dramitpurifoundation.org/](https://www.dramitpurifoundation.org/) — Mission, conviction, and foundation overview.
+- **Six Pillars:** [https://www.dramitpurifoundation.org/pillars/](https://www.dramitpurifoundation.org/pillars/) — Strategic architecture across arts, medicine, education, robotics, research, and practice.
+- **Ingenuity Ladder & Framework:** [https://www.dramitpurifoundation.org/framework/](https://www.dramitpurifoundation.org/framework/) — Theory of Change, Human-AI Operating Matrix, and measurable success benchmarks.
+- **Affiliated Ecosystem:** [https://www.dramitpurifoundation.org/ecosystem/](https://www.dramitpurifoundation.org/ecosystem/) — Arts & robotics physical synergy and affiliated platforms.
+- **About & Leadership:** [https://www.dramitpurifoundation.org/about/](https://www.dramitpurifoundation.org/about/) — Founder Dr. Amit Puri, seven guiding principles, and partnership dialogues.
+- **Research: Cloud Transformation & Low-Code/No-Code:** [https://www.dramitpurifoundation.org/research/cloud-transformation-lcnc/](https://www.dramitpurifoundation.org/research/cloud-transformation-lcnc/) — Doctoral dissertation research (Doctorate in Business Administration with specialization in Data Science 2022–2024, Swiss School of Business and Management, Geneva) on LCNC platforms, citizen development, 31.04% TCO cost savings model, and 31-metric evaluation framework.
+- **Research: Code Smells in Microservices vs Monoliths:** [https://www.dramitpurifoundation.org/research/code-smells-microservices-vs-monoliths/](https://www.dramitpurifoundation.org/research/code-smells-microservices-vs-monoliths/) — MS in Data Science research (Liverpool John Moores University) comparing 754 monolith versions vs microservices investigating code smell drift and compounding technical debt.
+
+## Core Conviction & Vision
+Artificial intelligence is the most powerful amplifier of human capability ever built — and amplifiers only work on a signal that already exists. If foundational human skills are allowed to atrophy while AI capability accelerates, the result is faster output with thinner thinking. Our foundation exists to ensure human cognitive, creative, and ethical capacities deepen alongside AI advances.
+
+## The Theory of Change: The Ingenuity Ladder
+We reject the framing of "humans versus AI." Our working model is a **ladder**, not a **swap**:
+1. **Rung 1: Foundational (Communicative) Skills:** Speaking, listening, reading, writing, comprehension. The human must do the reps. AI provides real-time coaching, feedback, and correction — never performing the core cognitive rep on the human's behalf.
+2. **Rung 2: Reflective (Conscious) Capacities:** Self-awareness, sustained attention, memory, meta-cognition. AI acts as a reflective mirror and thinking journal, while ownership of reflection remains human.
+3. **Rung 3: Advanced (Generative) Mastery:** Critical thinking, creativity, synthesis, discernment, empathy, ethical reasoning. AI serves as a collaborative accelerator, brainstorming partner, and research multiplier, while taste, direction, and the final decision remain human.
+
+## The Six Strategic Pillars
+1. **Pillar I — Human Skills Foundation:** Cultivating communicative fluency, conscious attention, and advanced generative skills.
+2. **Pillar II — Arts & Creative Expression:** Treating music, visual arts, literature, dance, and craft as foundational training grounds for spatial intuition, pattern recognition, and tactile intelligence.
+3. **Pillar III — Human-AI Collaboration Practice:** Establishing non-negotiable rules where humans stay editors and creators while AI accelerates execution.
+4. **Pillar IV — Research Acceleration: Medicine & Healthcare:** Pairing biological intuition and clinical judgment with AI biomedical research and diagnostic pipelines.
+5. **Pillar V — Education Transformation:** Supporting pedagogy that rewards productive struggle, critical reasoning, and deep mastery rather than passive answers.
+6. **Pillar VI — Physical AI & Embodied Intelligence:** Bridging sensorimotor craft, tactile awareness, and real-world robotics where human intuition guides autonomous systems.
+
+## Affiliated Ecosystem
+- **Founder's Platform:** [https://www.amitpuri.com](https://www.amitpuri.com) — Dr. Amit Puri's official research, author notes, and strategic advisory.
+- **OpenAGI Stack:** [https://www.openagistack.com](https://www.openagistack.com) — Open architecture framework for agentic systems.
+- **The IoT World:** [https://www.theiotworld.io](https://www.theiotworld.io) — Connected ecosystems, edge AI, and sensor telemetry.
+- **OpenAGI News:** [https://www.openagi.news](https://www.openagi.news) — Frontier intelligence and autonomous agent industry updates.
+- **Gita Samvad:** [https://shrimadbhagavadgita.org](https://shrimadbhagavadgita.org) — Timeless philosophical discourse and contemplative dialogue.

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://dramitpuri.github.io/research/code-smells-microservices-vs-monoliths/">
+    <!-- Robots & Bot Directives -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- Author & Brand Metadata -->
+    <meta name="author" content="Dr. Amit Puri">
+    <!-- description -->
+    <meta name="description" content="Empirical MS in Data Science research (Liverpool John Moores University) investigating code smell shifts, structural modularity, and compounding technical debt across monoliths (Qualitas Corpus) and microservices.">
+    <!-- keywords -->
+    <meta name="keywords" content="Dr. Amit Puri Foundation, human ingenuity, AI collaboration, arts education, healthcare AI, education transformation, physical AI, embodied intelligence, human skills, AI ethics, human-AI collaboration, foundation, nonprofit, AI research, Dr Amit Puri">
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#070b14">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Code Smell Trends in Microservices vs. Monoliths | Dr. Amit Puri">
+    <meta property="og:description" content="Empirical MS in Data Science research (Liverpool John Moores University) investigating code smell shifts, structural modularity, and compounding technical debt across monoliths (Qualitas Corpus) and microservices.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dramitpuri.github.io/research/code-smells-microservices-vs-monoliths/">
+    <meta property="og:image" content="https://www.dramitpurifoundation.org/assets/images/og-banner.png">
+    <meta property="og:site_name" content="Dr. Amit Puri Foundation">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@iamamitpuri">
+    <meta name="twitter:creator" content="@iamamitpuri">
+    <meta name="twitter:title" content="Code Smell Trends in Microservices vs. Monoliths | Dr. Amit Puri">
+    <meta name="twitter:description" content="Empirical MS in Data Science research (Liverpool John Moores University) investigating code smell shifts, structural modularity, and compounding technical debt across monoliths (Qualitas Corpus) and microservices.">
+    <meta name="twitter:image" content="https://www.dramitpurifoundation.org/assets/images/og-banner.png">
+
+    <!-- Page Title -->
+    <title>Code Smell Trends in Microservices vs. Monoliths | Dr. Amit Puri | Dr. Amit Puri Foundation — Amplifying Human Ingenuity in the Age of AI</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/landing-3/images/favicon.png">
+
+    <!-- Machine-Readable Agent & Markdown Alternates (llms.txt / acceptmarkdown) -->
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Dr. Amit Puri Foundation — LLM Brief">
+    <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="Dr. Amit Puri Foundation — Complete LLM Context">
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Plaintext LLM Context">
+
+    <!-- Google Fonts: Playfair Display + Plus Jakarta Sans + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Foundation Custom Styles -->
+    <link rel="stylesheet" href="/assets/css/foundation.css">
+
+    <!-- No-JS Graceful Fallback: Ensure immediate, uninhibited visibility of all content without JS -->
+    <noscript>
+        <style>
+            [data-animate] {
+                opacity: 1 !important;
+                transform: none !important;
+                visibility: visible !important;
+            }
+        </style>
+    </noscript>
+
+    <!-- Schema.org Comprehensive Structured Data Graph (Brand Discoverability & Agent Disambiguation) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "EducationalOrganization", "NGO"],
+          "@id": "https://www.dramitpurifoundation.org/#organization",
+          "name": "Dr. Amit Puri Foundation",
+          "alternateName": [
+            "dramitpurifoundation",
+            "Dr Amit Puri Foundation",
+            "Amit Puri Foundation",
+            "dramitpurifoundation.org",
+            "DAPF"
+          ],
+          "url": "https://www.dramitpurifoundation.org",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.dramitpurifoundation.org/assets/landing-3/images/favicon.png",
+            "caption": "Dr. Amit Puri Foundation Logo"
+          },
+          "image": "https://www.dramitpurifoundation.org/assets/images/og-banner.png",
+          "description": "Our foundation cultivates human ingenuity alongside AI — building programs, partnerships, and practices that strengthen foundational and advanced human skills across the arts, medicine, education, and physical AI.",
+          "slogan": "Amplifying Human Ingenuity in the Age of AI",
+          "foundingDate": "2026",
+          "email": "info@amitpuri.com",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://www.amitpuri.com/#person",
+            "name": "Dr. Amit Puri",
+            "jobTitle": "Founder & Strategic Advisor",
+            "url": "https://www.amitpuri.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/iamamitpuri",
+              "https://github.com/amitpuri",
+              "https://x.com/iamamitpuri",
+              "https://topmate.io/amitpuri"
+            ]
+          },
+          "sameAs": [
+            "https://www.amitpuri.com",
+            "https://github.com/amitpuri",
+            "https://x.com/iamamitpuri",
+            "https://www.openagistack.com",
+            "https://www.theiotworld.io",
+            "https://www.openagi.news",
+            "https://shrimadbhagavadgita.org"
+          ],
+          "knowsAbout": [
+            "Human Ingenuity",
+            "Human-AI Collaboration",
+            "Artificial Intelligence Ethics",
+            "Physical AI & Embodied Robotics",
+            "Healthcare AI & Medical Research",
+            "Arts Education & Tacit Knowledge",
+            "Cognitive Resilience"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.dramitpurifoundation.org/#website",
+          "url": "https://www.dramitpurifoundation.org",
+          "name": "Dr. Amit Puri Foundation",
+          "alternateName": "dramitpurifoundation",
+          "publisher": {
+            "@id": "https://www.dramitpurifoundation.org/#organization"
+          },
+          "inLanguage": "en-US",
+          "description": "Official website and Strategic Foundation Framework of the Dr. Amit Puri Foundation."
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="fd-body">
+    <header class="fd-header">
+    <nav class="fd-navbar" id="fd-navbar" role="navigation" aria-label="Main navigation">
+        <div class="fd-navbar__container">
+            <!-- Brand -->
+            <a href="/" class="fd-navbar__brand" aria-label="Dr. Amit Puri Foundation">
+                <div class="fd-navbar__logo-gem" aria-hidden="true">
+                    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="brandGrad" x1="2" y1="2" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#fbbf24"/>
+                                <stop offset="45%" stop-color="#8b5cf6"/>
+                                <stop offset="100%" stop-color="#06b6d4"/>
+                            </linearGradient>
+                            <radialGradient id="gemInnerGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#070b14" stop-opacity="0.1"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="18" cy="18" r="16" fill="url(#gemInnerGlow)" stroke="url(#brandGrad)" stroke-width="1.75"/>
+                        <!-- Stylized A + P + Resonance Wave -->
+                        <path d="M12 25L18 11L24 25" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.5 20H21.5" stroke="url(#brandGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="18" cy="11" r="2.2" fill="#fbbf24"/>
+                    </svg>
+                </div>
+                <div class="fd-navbar__brand-text">
+                    <span class="fd-navbar__brand-name">Dr. Amit Puri</span>
+                    <span class="fd-navbar__brand-sub">Foundation</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <ul class="fd-navbar__links" id="fd-nav-links" role="list">
+                <li><a href="/#mission"
+                    class="fd-navbar__link">Mission</a></li>
+                <li><a href="/pillars/"
+                    class="fd-navbar__link">Six Pillars</a></li>
+                <li><a href="/framework/#theory"
+                    class="fd-navbar__link"
+                    data-nav-page="framework" data-nav-hash="theory">Ingenuity Ladder</a></li>                
+                <li><a href="/research/"
+                    class="fd-navbar__link"
+                    data-nav-page="research" data-nav-hash="">Research &amp; Publications</a></li>
+                <li><a href="/ecosystem/"
+                    class="fd-navbar__link"
+                    data-nav-page="ecosystem" data-nav-hash="">Ecosystem</a></li>
+                <li><a href="/about/#contact"
+                    class="fd-navbar__link fd-navbar__link--cta">
+                    <span>Collaborate</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a></li>
+            </ul>
+
+        <!-- Hamburger -->
+        <button class="fd-navbar__hamburger" id="fd-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="fd-nav-links">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<!-- Mobile Drawer Backdrop Overlay -->
+<div class="fd-navbar__backdrop" id="fd-navbar-backdrop" aria-hidden="true"></div>
+</header>
+<script>
+(function () {
+  // Default hash when no fragment is present, per page group
+  var groupDefaults = { framework: 'theory', ecosystem: '' };
+
+  function updateNav() {
+    var path = window.location.pathname;
+    var hash = window.location.hash.replace('#', '');
+
+    // Which group?
+    var pageGroup = null;
+    if (path.indexOf('/framework') !== -1) pageGroup = 'framework';
+    else if (path.indexOf('/ecosystem') !== -1) pageGroup = 'ecosystem';
+    if (!pageGroup) return;
+
+    // If no hash in URL, use the group's default
+    var activeHash = hash || groupDefaults[pageGroup];
+
+    // Clear existing active from all hash-driven links
+    document.querySelectorAll('[data-nav-page]').forEach(function (a) {
+      a.classList.remove('fd-navbar__link--active');
+    });
+
+    // Set active on the exact match only
+    var matched = null;
+    document.querySelectorAll('[data-nav-page="' + pageGroup + '"]').forEach(function (a) {
+      if (a.dataset.navHash === activeHash) matched = a;
+    });
+    if (matched) matched.classList.add('fd-navbar__link--active');
+  }
+
+  // Run on load and on every hash change (e.g. clicking same-page anchor links)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNav);
+  } else {
+    updateNav();
+  }
+  window.addEventListener('hashchange', updateNav);
+})();
+</script>
+
+    <main id="main-content" role="main">
+        
+<section class="fd-page-hero" aria-label="Code Smells: Microservices vs. Monoliths page banner">
+    <div class="fd-page-hero__glow fd-page-hero__glow--amber" aria-hidden="true"></div>
+    <div class="fd-page-hero__glow fd-page-hero__glow--violet" aria-hidden="true"></div>
+
+    <div class="fd-container fd-page-hero__container">
+        <!-- Breadcrumb -->
+        <nav class="fd-page-hero__breadcrumb" aria-label="Breadcrumb">
+            <a href="/" class="fd-page-hero__breadcrumb-home">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+            </a>
+            
+            <i class="fas fa-chevron-right fd-page-hero__breadcrumb-sep" aria-hidden="true"></i>
+            <span class="fd-page-hero__breadcrumb-current">Code Smells: Microservices vs. Monoliths</span>
+        </nav>
+
+        <div class="fd-page-hero__content">
+            <div class="fd-page-hero__eyebrow" data-animate="fade-up">
+                
+                <i class="fas fa-code-compare" aria-hidden="true"></i>
+                
+                <span>MS in Data Science Dissertation · Liverpool John Moores University</span>
+            </div>
+            <h1 class="fd-page-hero__title" data-animate="fade-up" data-delay="80">Code Smells: Microservices vs. Monoliths</h1>
+            
+            <p class="fd-page-hero__desc" data-animate="fade-up" data-delay="160">
+                A natural-experiment static analysis comparing 754 monolith versions with modern microservices repositories to assess whether architectural decomposition inherently guarantees cleaner software.
+            </p>
+            
+        </div>
+    </div>
+</section>
+
+
+<section class="fd-article-section" aria-label="Research Publication Details">
+    <div class="fd-container">
+
+        <!-- Author & Research Publication Header Meta Bar -->
+        <div class="fd-research-meta-bar" data-animate="fade-up">
+            <div class="fd-meta-author-wrap">
+                <img src="/assets/avatar/amitpuri-avatar.svg" alt="Dr. Amit Puri" class="fd-meta-avatar" width="48" height="48">
+                <div class="fd-meta-author-info">
+                    <div class="fd-meta-author-name">
+                        <span>Dr. Amit Puri</span>
+                        <i class="fas fa-certificate" style="color: var(--fd-gold-light); font-size: 0.85rem;" title="Published Author"></i>
+                    </div>
+                    <span class="fd-meta-author-title">Master of Science (MS) in Data Science (LJMU) · Enterprise Cloud &amp; AI Architect</span>
+                </div>
+            </div>
+
+            <div class="fd-meta-badges-wrap">
+                <span class="fd-meta-badge fd-meta-badge--violet">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span>Liverpool John Moores University</span>
+                </span>
+                <span class="fd-meta-badge fd-meta-badge--cyan">
+                    <i class="fas fa-microchip" aria-hidden="true"></i>
+                    <span>Qualitas Corpus Baseline</span>
+                </span>
+                <span class="fd-meta-badge fd-meta-badge--violet">
+                    <i class="fas fa-code" aria-hidden="true"></i>
+                    <span>Designite Multi-Metric Pipeline</span>
+                </span>
+                <a href="https://dx.doi.org/10.13140/RG.2.2.21689.65126" target="_blank" rel="noopener noreferrer" class="fd-meta-badge fd-meta-badge--gold" title="Official DOI Citation">
+                    <i class="fas fa-fingerprint" aria-hidden="true"></i>
+                    <span>DOI: 10.13140/RG.2.2.21689.65126</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Telemetry HUD Chips Grid -->
+        <div class="fd-research-hud" data-animate="fade-up">
+            <!-- HUD 1 -->
+            <div class="fd-hud-item" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-server fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill" style="color: var(--fd-cyan-light); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.15);">Monolith Baseline</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--cyan">754</span>
+                <span class="fd-hud-label">Monolith Versions</span>
+                <span class="fd-hud-desc">112 systems in Qualitas Corpus analyzed longitudinally across release lifecycles</span>
+            </div>
+
+            <!-- HUD 2 -->
+            <div class="fd-hud-item" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-arrow-trend-down fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill" style="color: var(--fd-emerald); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.15);">Structural Shift</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--emerald">~80%</span>
+                <span class="fd-hud-label">Coupling Smell Drop</span>
+                <span class="fd-hud-desc">Sharp collapse in encapsulation flaws, cyclic dependencies, &amp; broken hierarchies</span>
+            </div>
+
+            <!-- HUD 3 -->
+            <div class="fd-hud-item" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-network-wired fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill">Cloud Repos</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--violet">18 Repos</span>
+                <span class="fd-hud-label">Microservices Corpus</span>
+                <span class="fd-hud-desc">Curated Java &amp; C# repos evaluated with Dockerfiles &amp; YAML manifests</span>
+            </div>
+
+            <!-- HUD 4 -->
+            <div class="fd-hud-item" style="--card-accent: #f43f5e; --card-accent-rgb: 244, 63, 94;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-triangle-exclamation fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill" style="color: var(--fd-rose); border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.15);">Debt Compounding</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--rose">16×–17×</span>
+                <span class="fd-hud-label">Aging Amplification</span>
+                <span class="fd-hud-desc">Longitudinal tracking proved non-linear smell amplification vs LOC growth</span>
+            </div>
+        </div>
+
+        <div class="fd-article-layout">
+            <!-- Sticky Sidebar Navigation with Scrollspy -->
+            <aside class="fd-article-sidebar" aria-label="Table of Contents">
+                <div class="fd-sidebar-title">
+                    <i class="fas fa-list-check" aria-hidden="true"></i>
+                    <span>Research Index</span>
+                </div>
+                <ul class="fd-sidebar-toc" id="article-toc">
+                    <li><a href="#executive-summary"><span class="fd-toc-num">01</span><span>Executive Summary</span></a></li>
+                    <li><a href="#core-problem"><span class="fd-toc-num">02</span><span>Problem &amp; 4 Questions</span></a></li>
+                    <li><a href="#literature-taxonomy"><span class="fd-toc-num">03</span><span>11 Bad Smells Taxonomy</span></a></li>
+                    <li><a href="#methodology-tooling"><span class="fd-toc-num">04</span><span>Empirical Methodology</span></a></li>
+                    <li><a href="#case-studies"><span class="fd-toc-num">05</span><span>Longitudinal Debt Drift</span></a></li>
+                    <li><a href="#quantitative-comparison"><span class="fd-toc-num">06</span><span>Central Comparison</span></a></li>
+                    <li><a href="#iac-infrastructure"><span class="fd-toc-num">07</span><span>Infrastructure (IaC)</span></a></li>
+                    <li><a href="#bridge-to-lcnc"><span class="fd-toc-num">08</span><span>The Bridge to Low-Code</span></a></li>
+                    <li><a href="#practitioner-rules"><span class="fd-toc-num">09</span><span>CI/CD Linter Gates</span></a></li>
+                    <li><a href="#citation-resources"><span class="fd-toc-num">10</span><span>Citation &amp; Data Access</span></a></li>
+                </ul>
+
+                <div class="fd-sidebar-actions">
+                    <a href="https://dx.doi.org/10.13140/RG.2.2.21689.65126" target="_blank" rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--gold">
+                        <i class="fas fa-file-lines" aria-hidden="true"></i>
+                        <span>DOI Citation</span>
+                    </a>
+                    <a href="/research/cloud-transformation-lcnc/" class="fd-btn fd-btn--sm fd-btn--violet">
+                        <i class="fas fa-cloud-arrow-up" aria-hidden="true"></i>
+                        <span>Companion LCNC Study</span>
+                    </a>
+                    <a href="https://go.openagistack.com/research" target="_blank" rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--outline">
+                        <i class="fas fa-database" aria-hidden="true"></i>
+                        <span>Research Portal</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Research Article Body -->
+            <article class="fd-article-body">
+                <!-- Section 01: Executive Summary -->
+                <section class="fd-article-block" id="executive-summary" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-code-compare" aria-hidden="true"></i></span>
+                        <span>01. Executive Summary &amp; Core Insight</span>
+                    </h2>
+                    <p class="fd-article-lead">
+                        Software rarely fails outright when it is poorly built—it simply becomes progressively harder, riskier, and exponentially more expensive to change.
+                    </p>
+                    <p class="fd-article-p">
+                        Organizations routinely invest millions rewriting legacy monolithic applications into distributed microservices architectures with the implicit assumption that "modern" architecture automatically produces "cleaner, maintainable" code. This empirical study by <strong>Dr. Amit Puri</strong>, conducted for his <strong>MS in Data Science at Liverpool John Moores University (LJMU)</strong>, treats the monolith-to-microservices migration as a controlled natural experiment to test that foundational assumption.
+                    </p>
+                    <div class="fd-article-callout fd-article-callout--cyan">
+                        <div class="fd-callout-title">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <span>The Definitive Empirical Takeaway</span>
+                        </div>
+                        <p class="fd-callout-desc">
+                            Microservices decomposition successfully eliminates structural "God-Class" pathologies (plummeting encapsulation flaws, cyclic coupling, and broken inheritance by ~80%). However, <strong>it does not fix developer discipline</strong>: cognitive smells like <em>Unutilised Abstraction</em> surged by <strong>117% (191 → 416)</strong> and <em>Long Statements</em> rose from <strong>318 to 385</strong>, while <em>Magic Numbers</em> remained virtually identical.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 02: Core Problem & 4 Research Questions -->
+                <section class="fd-article-block" id="core-problem" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-clipboard-question" aria-hidden="true"></i></span>
+                        <span>02. Research Problem &amp; Guiding Questions</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        Prior academic software engineering research frequently studied monoliths and microservices as isolated domains using disparate metric definitions. This left a crucial empirical void: <em>no direct, metric-calibrated side-by-side comparison using a unified static analysis pipeline across both paradigms</em>.
+                    </p>
+                    <p class="fd-article-p">
+                        This study formulates four anchoring research questions:
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #f43f5e; --card-accent-rgb: 244, 63, 94;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-bug"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ1: Quality Degradation During Migration</h3>
+                            <p class="fd-matrix-card__desc">Does software quality actually degrade as organizations invest in cloud modernization and architectural rewrites?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-arrow-right-arrow-left"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ2: High-Sensitivity Metric Shifts</h3>
+                            <p class="fd-matrix-card__desc">Which specific code-level and architectural metrics shift most dramatically when moving from monoliths to microservices?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #fbbf24; --card-accent-rgb: 251, 191, 36;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-hand-pointer"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ3: Friction as a Driver for Low-Code</h3>
+                            <p class="fd-matrix-card__desc">Does the frictional overhead, cognitive load, and operational churn of microservices rewrites nudge enterprises toward No-Code/Low-Code platforms?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-scale-balanced"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ4: Metric Evidence for Platform Adoption</h3>
+                            <p class="fd-matrix-card__desc">Which code maintainability and complexity metrics quantitatively make the business case for adopting low-code platforms over custom microservices?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 03: Microservices Bad Smells & Literature Taxonomy -->
+                <section class="fd-article-block" id="literature-taxonomy" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></span>
+                        <span>03. The 11 Microservices Bad Smells Taxonomy</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        In monolithic systems, code smells reside comfortably within package boundaries. In distributed microservices architectures, smells metastasize across network boundaries, becoming dramatically harder to detect with conventional class-level linters.
+                    </p>
+                    <p class="fd-article-p">
+                        The research synthesizes the literature into the definitive <strong>11 Microservices Bad Smells Taxonomy</strong>:
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-scissors" style="color: var(--fd-violet-light); margin-right: 0.35rem;"></i> 1. Wrong Service Cuts</h3>
+                            <p class="fd-matrix-card__desc">Services sliced along horizontal technical tiers (UI, Logic, DB) rather than bounded business domains, causing chatty distributed anti-patterns.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #f43f5e; --card-accent-rgb: 244, 63, 94;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-location-pin-lock" style="color: var(--fd-rose); margin-right: 0.35rem;"></i> 2. Hard-Coded Endpoints</h3>
+                            <p class="fd-matrix-card__desc">Services directly addressing physical IP or DNS addresses without dynamic service discovery, DNS rotation, or load balancing.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #fbbf24; --card-accent-rgb: 251, 191, 36;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-arrows-spin" style="color: var(--fd-gold-light); margin-right: 0.35rem;"></i> 3. Cyclic Service Dependencies</h3>
+                            <p class="fd-matrix-card__desc">Circular invocation loops across services (Service A → Service B → Service C → Service A), introducing severe distributed deadlock risks.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-database" style="color: var(--fd-cyan-light); margin-right: 0.35rem;"></i> 4. Shared Persistence</h3>
+                            <p class="fd-matrix-card__desc">Multiple supposedly autonomous microservices reading and mutating the exact same relational database tables, breaking data encapsulation.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-cubes-stacked" style="color: var(--fd-emerald); margin-right: 0.35rem;"></i> 5. Greedy / Mega Services</h3>
+                            <p class="fd-matrix-card__desc">A single oversized service masquerading within a microservices cluster, consuming disproportionate compute and business logic.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #a78bfa; --card-accent-rgb: 167, 139, 250;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-door-open" style="color: var(--fd-violet-light); margin-right: 0.35rem;"></i> 6. Missing API Gateways</h3>
+                            <p class="fd-matrix-card__desc">External client apps directly invoking internal microservices without rate-limiting, SSL termination, or centralized authentication.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #fb7185; --card-accent-rgb: 251, 113, 133;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-file-code" style="color: var(--fd-rose); margin-right: 0.35rem;"></i> 7. Excessive Protocol Standards</h3>
+                            <p class="fd-matrix-card__desc">Uncontrolled sprawl of disparate communication protocols (gRPC, REST, SOAP, WebSockets) across the same service mesh.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #38bdf8; --card-accent-rgb: 56, 189, 248;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-code-branch" style="color: var(--fd-cyan-light); margin-right: 0.35rem;"></i> 8. API Versioning Pitfalls</h3>
+                            <p class="fd-matrix-card__desc">Breaking contract changes deployed without backward compatibility, requiring high-friction synchronized lock-step releases.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #f59e0b; --card-accent-rgb: 245, 158, 11;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-handshake-angle" style="color: var(--fd-gold-light); margin-right: 0.35rem;"></i> 9. Inappropriate Service Intimacy</h3>
+                            <p class="fd-matrix-card__desc">Services bypassing public API endpoints to access internal private classes, caches, or shared storage abstractions directly.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-box-archive" style="color: var(--fd-emerald); margin-right: 0.35rem;"></i> 10. Shared Distributed Libraries</h3>
+                            <p class="fd-matrix-card__desc">Coupling all microservices to a monolithic shared utility JAR/DLL, causing upstream dependency lockouts upon every minor patch.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #c084fc; --card-accent-rgb: 192, 132, 252;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-network-wired" style="color: var(--fd-violet-light); margin-right: 0.35rem;"></i> 11. ESB Overuse &amp; "Smart Pipes"</h3>
+                            <p class="fd-matrix-card__desc">Burying business logic and transformation pipelines inside enterprise service buses rather than keeping endpoints smart and pipes dumb.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 04: Empirical Methodology & Tooling -->
+                <section class="fd-article-block" id="methodology-tooling" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-gears" aria-hidden="true"></i></span>
+                        <span>04. Empirical Methodology &amp; Extraction Pipeline</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        The study deployed a comparative analytics pipeline using standardized static analysis across two complementary datasets:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>Dataset / Dimension</th>
+                                    <th>Composition &amp; Repositories</th>
+                                    <th>Analysis Tooling &amp; Thresholds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Monolith Baseline: Qualitas Corpus</strong></td>
+                                    <td>12 benchmark Java monoliths selected from the Qualitas Corpus (112 systems, 754 versions) ranked by GitHub stars and LOC: <em>Hibernate, Spring, Tomcat, Derby, Lucene, ANTLR, Apache Ant</em>.</td>
+                                    <td><strong>Designite</strong> static quality analyzer:
+                                        <br>• Method LOC &gt; 100
+                                        <br>• Cyclomatic Complexity &gt; 8
+                                        <br>• Class LOC &gt; 1000
+                                        <br>• LCOM (Lack of Cohesion) &gt; 0.8
+                                        <br>• Fan-in / Fan-out &gt; 20
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Microservices Corpus</strong></td>
+                                    <td>18 curated open-source Java &amp; C# microservices repositories, evaluated alongside their <strong>Dockerfiles and Kubernetes YAML manifests</strong> as first-class architectural artifacts.</td>
+                                    <td><strong>cloc/sloc</strong> for line counts, custom <strong>R statistical scripts</strong> (<code>process-cs-data.R</code>, <code>curate-data.R</code>, <code>analyze-data-func.R</code>), and automated shell extractors.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="fd-article-callout fd-article-callout--amber">
+                        <div class="fd-callout-title">
+                            <i class="fas fa-filter" aria-hidden="true"></i>
+                            <span>Key Data Handling Decisions</span>
+                        </div>
+                        <p class="fd-callout-desc">
+                            <strong>Magic Number</strong> appeared ~182,000 times across monoliths and was isolated from the primary comparative index to avoid swamping fine-grained structural signals. Conversely, <strong>Unutilised/Unnecessary Abstraction</strong> (~136,000 occurrences) was intentionally preserved because it served as the most decisive indicator of speculative over-engineering in microservices.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 05: Longitudinal Case Studies -->
+                <section class="fd-article-block" id="case-studies" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-timeline" aria-hidden="true"></i></span>
+                        <span>05. Longitudinal Aging &amp; Compounding Technical Debt</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        Tracking projects across historical release cycles revealed that technical debt does not accumulate linearly with code size—it <strong>compounds exponentially</strong>:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>Project &amp; Version Window</th>
+                                    <th>Codebase Size Shift</th>
+                                    <th>Observed Code Smell Trajectory</th>
+                                    <th>Architectural Takeaway</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Apache Ant</strong><br>(v1.1 → v1.2 → v1.8.4)</td>
+                                    <td>~6× LOC expansion over lifecycle</td>
+                                    <td>
+                                        • Unutilised Abstraction: 67 → 135<br>
+                                        • Broken Hierarchy: 13 → 41<br>
+                                        • Deficient Encapsulation: <strong style="color: var(--fd-rose);">16× Jump</strong><br>
+                                        • Long Parameter Lists: <strong style="color: var(--fd-rose);">17× Jump</strong>
+                                    </td>
+                                    <td>Technical debt is non-linear. As legacy monoliths age without dedicated refactoring budgets, structural smells compound at nearly triple the rate of LOC growth.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ANTLR</strong><br>(v2.4.0 → v4.0)</td>
+                                    <td>Major architectural rewrite</td>
+                                    <td>
+                                        • Complex Method: <span style="color: var(--fd-emerald);">127 → 80 (Refactored)</span><br>
+                                        • Long Statement: <span style="color: var(--fd-rose);">46 → 318 (Spiked)</span>
+                                    </td>
+                                    <td>Deliberate architectural refactoring successfully reduced method complexity, but introduced long method chaining and statement sprawl.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Microsoft PowerToys</strong><br>(Modern Monolith ~57 KLOC)</td>
+                                    <td>Modern C# / C++ codebase</td>
+                                    <td>
+                                        • Complex Method: Low (Double digits)<br>
+                                        • Long Method: Low
+                                    </td>
+                                    <td>Monoliths are not inherently bad. Modern monoliths equipped with rigorous CI/CD static linters maintain exceptionally clean profiles without microservice complexity.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 06: Central Quantitative Comparison -->
+                <section class="fd-article-block" id="quantitative-comparison" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-chart-simple" aria-hidden="true"></i></span>
+                        <span>06. The Quantitative Comparison: Monoliths vs. Microservices</span>
+                    </h2>
+                    <p class="fd-article-lead">
+                        When the monolithic benchmark dataset is compared directly against the microservices corpus, code smells divide into three unambiguous behavioral categories:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>Code Smell Metric</th>
+                                    <th>Monolith Baseline</th>
+                                    <th>Microservices Corpus</th>
+                                    <th>Empirical Variance</th>
+                                    <th>Architectural Diagnosis</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Deficient Encapsulation</strong></td>
+                                    <td>187</td>
+                                    <td>37</td>
+                                    <td><span class="fd-table-badge fd-table-badge--drop">- 80.2% Drop</span></td>
+                                    <td>Smaller service cuts naturally limit public class and field leakage.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Cyclic-Dependent Modularisation</strong></td>
+                                    <td>146</td>
+                                    <td>31</td>
+                                    <td><span class="fd-table-badge fd-table-badge--drop">- 78.8% Drop</span></td>
+                                    <td>Service boundaries force decoupled compilation units.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Broken Hierarchy</strong></td>
+                                    <td>168</td>
+                                    <td>39</td>
+                                    <td><span class="fd-table-badge fd-table-badge--drop">- 76.8% Drop</span></td>
+                                    <td>Microservices favor composition over deep inheritance trees.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Complex Method (CC &gt; 8)</strong></td>
+                                    <td>80</td>
+                                    <td>11</td>
+                                    <td><span class="fd-table-badge fd-table-badge--drop">- 86.3% Drop</span></td>
+                                    <td>Focused endpoint handlers curtail multi-branch method sprawl.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unutilised Abstraction</strong></td>
+                                    <td>191</td>
+                                    <td>416</td>
+                                    <td><span class="fd-table-badge fd-table-badge--spike">+ 117.8% Surge</span></td>
+                                    <td>Over-engineering: generic interfaces created for single implementations.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Long Statement (&gt; 100 chars)</strong></td>
+                                    <td>318</td>
+                                    <td>385</td>
+                                    <td><span class="fd-table-badge fd-table-badge--spike">+ 21.1% Increase</span></td>
+                                    <td>Fluent builders, stream pipelines, and inline serialization chaining.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Magic Number</strong></td>
+                                    <td>267</td>
+                                    <td>226</td>
+                                    <td><span class="fd-table-badge fd-table-badge--neutral">~ Flat (Neutral)</span></td>
+                                    <td>Architecture-neutral smell driven purely by individual developer habit.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 07: Infrastructure as Code (IaC) -->
+                <section class="fd-article-block" id="iac-infrastructure" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-box-open" aria-hidden="true"></i></span>
+                        <span>07. The Infrastructure Dimension: Docker &amp; Kubernetes Smells</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        A major contribution of this research was treating <strong>Infrastructure-as-Code (IaC)</strong> as code. While monoliths have minimal infrastructure definitions, microservices rely heavily on Dockerfiles, Helm charts, and Kubernetes YAML manifests.
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fab fa-docker"></i></div>
+                            <h3 class="fd-matrix-card__title">Dockerfile Smells</h3>
+                            <p class="fd-matrix-card__desc">Unpinned base image tags (<code>:latest</code>), bloated image layers without multi-stage builds, running containers as root, and un-cached package installations.</p>
+                            <ul class="fd-matrix-card__list">
+                                <li><i class="fas fa-triangle-exclamation" style="color: var(--fd-rose);"></i> <span>Root user execution</span></li>
+                                <li><i class="fas fa-triangle-exclamation" style="color: var(--fd-rose);"></i> <span>Unpinned apt/npm dependencies</span></li>
+                            </ul>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-dharmachakra"></i></div>
+                            <h3 class="fd-matrix-card__title">Kubernetes YAML Smells</h3>
+                            <p class="fd-matrix-card__desc">Missing CPU/memory resource limits, absent readiness/liveness probes, hardcoded plaintext secrets, and unconfigured pod disruption budgets (PDBs).</p>
+                            <ul class="fd-matrix-card__list">
+                                <li><i class="fas fa-triangle-exclamation" style="color: var(--fd-rose);"></i> <span>OOMKill risks from missing limits</span></li>
+                                <li><i class="fas fa-triangle-exclamation" style="color: var(--fd-rose);"></i> <span>Missing health check probes</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 08: Bridge to Low-Code / No-Code -->
+                <section class="fd-article-block" id="bridge-to-lcnc" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-cubes" aria-hidden="true"></i></span>
+                        <span>08. The Bridge to Low-Code &amp; Citizen Development</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        Under <strong>RQ3 &amp; RQ4</strong>, the research investigates why so many enterprise microservices migrations end in cognitive fatigue:
+                    </p>
+                    <div class="fd-article-callout fd-article-callout--amber">
+                        <div class="fd-callout-title">
+                            <i class="fas fa-hand-holding-dollar" aria-hidden="true"></i>
+                            <span>The Cognitive Tax of Distributed Systems</span>
+                        </div>
+                        <p class="fd-callout-desc">
+                            Building and operating 50+ microservices requires managing distributed tracing, circuit breakers, service meshes, Kafka topologies, and container orchestration. For standard business CRUD applications, this massive cognitive tax yields negative ROI. This frictional overhead is the exact catalyst driving enterprises toward <strong>Low-Code / No-Code platforms (Power Platform, AppSheet, OutSystems)</strong>, which abstract distributed plumbing while exposing clean API contracts.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 09: Actionable Guidelines for Practitioners -->
+                <section class="fd-article-block" id="practitioner-rules" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-screwdriver-wrench" aria-hidden="true"></i></span>
+                        <span>09. Actionable Guidelines for Architects &amp; CI/CD Linters</span>
+                    </h2>
+                    <p class="fd-article-lead">
+                        Never assume decomposing into microservices buys cleaner code. Configure your automated CI/CD static analysis pipelines with these calibrated rules:
+                    </p>
+
+                    <!-- Code block for CI Linter rules -->
+                    <div class="fd-code-block">
+                        <div class="fd-code-header">
+                            <span class="fd-code-title"><i class="fas fa-terminal"></i> recommended-sonarqube-rules.json</span>
+                            <span class="fd-code-lang">JSON</span>
+                        </div>
+                        <pre class="fd-code-content"><code>{
+  <span class="fd-code-prop">"rules"</span>: [
+    {
+      <span class="fd-code-prop">"key"</span>: <span class="fd-code-string">"UnutilisedAbstraction"</span>,
+      <span class="fd-code-prop">"severity"</span>: <span class="fd-code-string">"BLOCKER"</span>,
+      <span class="fd-code-prop">"description"</span>: <span class="fd-code-string">"Fail build if interface has only one concrete implementation without extension rationale"</span>
+    },
+    {
+      <span class="fd-code-prop">"key"</span>: <span class="fd-code-string">"MaxStatementLength"</span>,
+      <span class="fd-code-prop">"threshold"</span>: <span class="fd-code-val">100</span>,
+      <span class="fd-code-prop">"severity"</span>: <span class="fd-code-string">"MAJOR"</span>,
+      <span class="fd-code-prop">"description"</span>: <span class="fd-code-string">"Prevent unreadable fluent chaining in stream operations"</span>
+    },
+    {
+      <span class="fd-code-prop">"key"</span>: <span class="fd-code-string">"SharedPersistenceBan"</span>,
+      <span class="fd-code-prop">"severity"</span>: <span class="fd-code-string">"CRITICAL"</span>,
+      <span class="fd-code-prop">"description"</span>: <span class="fd-code-string">"Disallow cross-service direct SQL schema queries"</span>
+    }
+  ]
+}</code></pre>
+                    </div>
+
+                    <ul class="fd-research-breakdown-list" style="margin-top: 1.5rem;">
+                        <li><i class="fas fa-circle-check"></i> <span><strong>Target Unutilised Abstractions:</strong> Fail builds when interfaces or abstract base classes have only a single concrete implementation without an immediate extensibility rationale.</span></li>
+                        <li><i class="fas fa-circle-check"></i> <span><strong>Enforce Statement Length Limits:</strong> Restrict chained fluent statements and long stream filters to prevent unreadable, bug-prone one-liners.</span></li>
+                        <li><i class="fas fa-circle-check"></i> <span><strong>Mandate IaC Static Analysis:</strong> Integrate tools like <em>Hadolint</em> for Dockerfiles and <em>Kubeconform / Checkov</em> for Kubernetes manifests directly into the commit pipeline.</span></li>
+                        <li><i class="fas fa-circle-check"></i> <span><strong>Enforce Shared Persistence Bans:</strong> Automated architectural linter checks must ensure no microservice can access another service's private database tables directly.</span></li>
+                    </ul>
+                </section>
+
+                <!-- Section 10: Academic Citation & Resources -->
+                <section class="fd-article-block" id="citation-resources" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-quote-left" aria-hidden="true"></i></span>
+                        <span>10. Academic Citation &amp; Public Access</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        To cite this comparative empirical research in academic literature or industry reports, use:
+                    </p>
+
+                    <div class="fd-citation-box">
+                        <div id="citation-text">
+                            <strong>Puri, A. (2021).</strong> <em>Study trends in code smell in microservices-based architecture, Compare with monoliths.</em> Master's Dissertation (MS in Data Science), Liverpool John Moores University. DOI: 10.13140/RG.2.2.21689.65126
+                        </div>
+                        <button class="fd-btn fd-btn--sm fd-btn--outline fd-citation-copy-btn" id="copy-citation-btn" onclick="copyCitation()">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                            <span id="copy-btn-text">Copy APA Citation</span>
+                        </button>
+                    </div>
+
+                    <div class="fd-matrix-grid" style="margin-top: 2.25rem;">
+                        <div class="fd-matrix-card" style="--card-accent: #fbbf24; --card-accent-rgb: 251, 191, 36;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-file-lines" style="color: var(--fd-gold-light); margin-right: 0.4rem;"></i> Research Gate Publication</h3>
+                            <p class="fd-matrix-card__desc">Access the official paper, citation metrics, and peer discussions on ResearchGate.</p>
+                            <a href="https://dx.doi.org/10.13140/RG.2.2.21689.65126" target="_blank" rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--gold" style="margin-top: auto;">
+                                <span>View DOI Citation</span>
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-cloud-arrow-up" style="color: var(--fd-violet-light); margin-right: 0.4rem;"></i> Companion Doctoral Study</h3>
+                            <p class="fd-matrix-card__desc">Explore the complementary doctoral research (Doctorate in Business Administration with specialization in Data Science) on Cloud Transformation Challenges &amp; Low-Code platforms.</p>
+                            <a href="/research/cloud-transformation-lcnc/" class="fd-btn fd-btn--sm fd-btn--violet" style="margin-top: auto;">
+                                <span>Read LCNC Research</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+    <!-- Section Bottom Link -->
+    <div class="fd-research__bottom-cta" data-animate="fade-up" data-delay="200">
+        <a href="/" class="fd-btn fd-btn--lg fd-btn--violet">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Back to Home</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Scrollspy & Citation Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // ScrollSpy for Sidebar TOC
+    const tocLinks = document.querySelectorAll('#article-toc a');
+    const sections = document.querySelectorAll('.fd-article-block[id]');
+
+    function onScroll() {
+        let currentId = '';
+        const scrollPosition = window.scrollY + 140;
+
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+                currentId = section.getAttribute('id');
+            }
+        });
+
+        tocLinks.forEach(link => {
+            link.classList.remove('is-active');
+            if (link.getAttribute('href') === '#' + currentId) {
+                link.classList.add('is-active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+});
+
+function copyCitation() {
+    const citation = "Puri, A. (2021). Study trends in code smell in microservices-based architecture, Compare with monoliths. Master's Dissertation (MS in Data Science), Liverpool John Moores University. DOI: 10.13140/RG.2.2.21689.65126";
+    navigator.clipboard.writeText(citation).then(function () {
+        const btnText = document.getElementById('copy-btn-text');
+        btnText.textContent = "Copied to Clipboard!";
+        setTimeout(() => { btnText.textContent = "Copy APA Citation"; }, 2500);
+    });
+}
+</script>
+
+    </main>
+    <footer class="fd-footer" role="contentinfo">
+    <div class="fd-container">
+        <div class="fd-footer__grid">
+            <!-- Brand & Mission Column -->
+            <div class="fd-footer__brand-col">
+                <a href="/" class="fd-footer__brand-link" aria-label="Dr. Amit Puri Foundation">
+                    <div class="fd-footer__logo-mark" aria-hidden="true">
+                        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="18" cy="18" r="16" stroke="url(#footGrad)" stroke-width="1.75"/>
+                            <path d="M12 25L18 11L24 25" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.5 20H21.5" stroke="url(#footGrad)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="footGrad" x1="2" y1="2" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#fbbf24"/>
+                                    <stop offset="50%" stop-color="#8b5cf6"/>
+                                    <stop offset="100%" stop-color="#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="fd-footer__brand-name">
+                        <span>Dr. Amit Puri</span>
+                        <strong>Foundation</strong>
+                    </div>
+                </a>
+                <p class="fd-footer__tagline">
+                    Cultivating Human Ingenuity in the Age of AI
+                </p>
+                <div class="fd-footer__mission-short">
+                    Cultivating human reasoning, creativity, and expression alongside AI across arts, healthcare, education, and robotics.
+                </div>
+            </div>
+
+            <!-- Pillars Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Strategic Pillars</h3>
+                <ul class="fd-footer__nav" role="list">
+                    
+                    <li>
+                        <a href="/pillars/human-skills/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">01</span>
+                            <span>Human Skills Foundation</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/arts-expression/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">02</span>
+                            <span>Arts & Creative Expression</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/human-ai-collab/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">03</span>
+                            <span>Human-AI Collaboration Practice</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/healthcare-research/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">04</span>
+                            <span>Research Acceleration: Medicine & Healthcare</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/education/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">05</span>
+                            <span>Education Transformation</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/physical-ai/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">06</span>
+                            <span>Future Skills: Physical AI & Embodied Intelligence</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <!-- Ecosystem Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Affiliated Ecosystem</h3>
+                <ul class="fd-footer__nav" role="list">
+                    
+                    <li>
+                        <a href="https://www.amitpuri.com" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Dr. Amit Puri</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.openagistack.com" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>OpenAGI Stack</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.theiotworld.io" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>The IoT World</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.openagi.news" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>OpenAGI News</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://shrimadbhagavadgita.org" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Shrimad Bhagavad Gita</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://designpattern.fyi" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Design Pattern FYI</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <!-- Framework & Contact Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Framework &amp; Connect</h3>
+                <ul class="fd-footer__nav" role="list">
+                    <li><a href="/framework/#theory" class="fd-footer__link">The Ingenuity Ladder</a></li>
+                    <li><a href="/research" class="fd-footer__link">Research Publications</a></li>
+                    <li><a href="/about/#principles" class="fd-footer__link">Guiding Principles</a></li>
+                    <li><a href="mailto:info@amitpuri.com" class="fd-footer__link"><i class="fas fa-envelope" aria-hidden="true"></i> info@amitpuri.com</a></li>
+                    <li><a href="https://topmate.io/amitpuri" target="_blank" rel="noopener" class="fd-footer__link"><i class="fas fa-calendar-check" aria-hidden="true"></i> Topmate Advisory</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fd-footer__bottom">
+            <div class="fd-footer__copyright">
+                &copy; 2026 Dr. Amit Puri Foundation. Cultivating Human Ingenuity in the Age of AI.
+            </div>
+            <div class="fd-footer__links-bottom">
+                <a href="https://www.openagi.news/privacy/" target="_blank" rel="noopener noreferrer" class="fd-footer__legal-link">Privacy</a>
+                <span class="fd-footer__legal-sep" aria-hidden="true">·</span>
+                <a href="https://www.openagi.news/terms/" target="_blank" rel="noopener noreferrer" class="fd-footer__legal-link">Terms</a>
+                
+                <span class="fd-footer__legal-sep" aria-hidden="true">·</span>
+                <a href="/" class="fd-footer__back-top">
+                    <span>Home</span>
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/assets/js/main.js" defer></script>
+    <!-- Floating Back to Top Button -->
+<a href="#top" id="fd-back-to-top" class="fd-back-to-top" title="Back to top" aria-label="Back to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</a>
+
+<style>
+    .fd-back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 999;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(6, 182, 212, 0.85));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4), 0 0 15px rgba(6, 182, 212, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(16px);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s ease,
+                    background 0.3s ease;
+        cursor: pointer;
+    }
+
+    .fd-back-to-top.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .fd-back-to-top:hover {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 1), rgba(6, 182, 212, 1));
+        box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6), 0 0 20px rgba(6, 182, 212, 0.4);
+        transform: translateY(-3px);
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .fd-back-to-top:active {
+        transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        .fd-back-to-top {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 42px;
+            height: 42px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        var btn = document.getElementById('fd-back-to-top');
+        if (!btn) return;
+
+        function toggleBackToTop() {
+            if (window.scrollY > 300) {
+                btn.classList.add('is-visible');
+            } else {
+                btn.classList.remove('is-visible');
+            }
+        }
+
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        toggleBackToTop();
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    })();
+</script>
+<!-- End Floating Back to Top Button -->
+
+</body>
+</html>
