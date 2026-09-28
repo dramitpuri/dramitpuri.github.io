@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Canonical URL -->
+<link rel="canonical" href="https://dramitpuri.github.io/research/hybrid-search-rag-architecture/">
+<!-- Robots & Bot Directives -->
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<!-- Author & Brand Metadata -->
+<meta name="author" content="Dr. Amit Puri">
+<!-- description -->
+<meta name="description" content="Empirical systems research comparing 18 retrieval strategies across sparse (BM25, TF-IDF), dense (MiniLM, SPECTER2), RRF fusion, cross-encoder reranking, 1-hop knowledge-graph traversal, and Qdrant HNSW ANN vector search on 44 scientific PDF documents (9,558 chunks).">
+<!-- keywords -->
+<meta name="keywords" content="Dr. Amit Puri Foundation, human ingenuity, AI collaboration, arts education, healthcare AI, education transformation, physical AI, embodied intelligence, human skills, AI ethics, human-AI collaboration, foundation, nonprofit, AI research, Dr Amit Puri">
+<!-- Theme Color -->
+<meta name="theme-color" content="#070b14">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Hybrid Retrieval Strategies for RAG over Scientific Literature | Dr. Amit Puri">
+<meta property="og:description" content="Empirical systems research comparing 18 retrieval strategies across sparse (BM25, TF-IDF), dense (MiniLM, SPECTER2), RRF fusion, cross-encoder reranking, 1-hop knowledge-graph traversal, and Qdrant HNSW ANN vector search on 44 scientific PDF documents (9,558 chunks).">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dramitpuri.github.io/research/hybrid-search-rag-architecture/">
+<meta property="og:image" content="https://www.dramitpurifoundation.org/assets/images/og-banner.png">
+<meta property="og:site_name" content="Dr. Amit Puri Foundation">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@iamamitpuri">
+<meta name="twitter:creator" content="@iamamitpuri">
+<meta name="twitter:title" content="Hybrid Retrieval Strategies for RAG over Scientific Literature | Dr. Amit Puri">
+<meta name="twitter:description" content="Empirical systems research comparing 18 retrieval strategies across sparse (BM25, TF-IDF), dense (MiniLM, SPECTER2), RRF fusion, cross-encoder reranking, 1-hop knowledge-graph traversal, and Qdrant HNSW ANN vector search on 44 scientific PDF documents (9,558 chunks).">
+<meta name="twitter:image" content="https://www.dramitpurifoundation.org/assets/images/og-banner.png">
+
+<!-- Page Title -->
+<title>Hybrid Retrieval Strategies for RAG over Scientific Literature | Dr. Amit Puri | Dr. Amit Puri Foundation — Amplifying Human Ingenuity in the Age of AI</title>
+
+<!-- Favicon -->
+<link rel="icon" href="/assets/landing-3/images/favicon.png">
+
+<!-- Machine-Readable Agent & Markdown Alternates (llms.txt / acceptmarkdown) -->
+<link rel="alternate" type="text/markdown" href="/llms.txt"
+  title="Dr. Amit Puri Foundation — LLM Brief">
+<link rel="alternate" type="text/markdown" href="/llms-full.txt"
+  title="Dr. Amit Puri Foundation — Complete LLM Context">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="Plaintext LLM Context">
+
+<!-- Google Fonts: Playfair Display + Plus Jakarta Sans + JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet">
+
+<!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  crossorigin="anonymous" referrerpolicy="no-referrer">
+
+<!-- Foundation Custom Styles -->
+<link rel="stylesheet" href="/assets/css/foundation.css">
+
+<!-- No-JS Graceful Fallback: Ensure immediate, uninhibited visibility of all content without JS -->
+<noscript>
+  <style>
+    [data-animate] {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+  </style>
+</noscript>
+
+<!-- Schema.org Comprehensive Structured Data Graph (Brand Discoverability & Agent Disambiguation) -->
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Organization", "EducationalOrganization", "NGO"],
+          "@id": "https://www.dramitpurifoundation.org/#organization",
+          "name": "Dr. Amit Puri Foundation",
+          "alternateName": [
+            "dramitpurifoundation",
+            "Dr Amit Puri Foundation",
+            "Amit Puri Foundation",
+            "dramitpurifoundation.org",
+            "DAPF"
+          ],
+          "url": "https://www.dramitpurifoundation.org",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.dramitpurifoundation.org/assets/landing-3/images/favicon.png",
+            "caption": "Dr. Amit Puri Foundation Logo"
+          },
+          "image": "https://www.dramitpurifoundation.org/assets/images/og-banner.png",
+          "description": "Our foundation cultivates human ingenuity alongside AI — building programs, partnerships, and practices that strengthen foundational and advanced human skills across the arts, medicine, education, and physical AI.",
+          "slogan": "Amplifying Human Ingenuity in the Age of AI",
+          "foundingDate": "2026",
+          "email": "info@amitpuri.com",
+          "founder": {
+            "@type": "Person",
+            "@id": "https://go.amitpuri.com/home#person",
+            "name": "Dr. Amit Puri",
+            "jobTitle": "Founder & Strategic Advisor",
+            "url": "https://go.amitpuri.com/home",
+            "sameAs": [
+              "https://www.linkedin.com/in/iamamitpuri",
+              "https://github.com/amitpuri",
+              "https://x.com/iamamitpuri",
+              "https://topmate.io/amitpuri"
+            ]
+          },
+          "sameAs": [
+            "https://go.amitpuri.com/home",
+            "https://github.com/amitpuri",
+            "https://x.com/iamamitpuri",
+            "https://www.openagistack.com",
+            "https://go.theiotworld.io",
+            "https://www.openagi.news",
+            "https://go.shrimadbhagavadgita.org"
+          ],
+          "knowsAbout": [
+            "Human Ingenuity",
+            "Human-AI Collaboration",
+            "Artificial Intelligence Ethics",
+            "Physical AI & Embodied Robotics",
+            "Healthcare AI & Medical Research",
+            "Arts Education & Tacit Knowledge",
+            "Cognitive Resilience"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.dramitpurifoundation.org/#website",
+          "url": "https://www.dramitpurifoundation.org",
+          "name": "Dr. Amit Puri Foundation",
+          "alternateName": "dramitpurifoundation",
+          "publisher": {
+            "@id": "https://www.dramitpurifoundation.org/#organization"
+          },
+          "inLanguage": "en-US",
+          "description": "Official website and Strategic Foundation Framework of the Dr. Amit Puri Foundation."
+        }
+      ]
+    }
+    </script>
+</head>
+<body class="fd-body">
+    <header class="fd-header">
+    <nav class="fd-navbar" id="fd-navbar" role="navigation" aria-label="Main navigation">
+        <div class="fd-navbar__container">
+            <!-- Brand -->
+            <a href="/" class="fd-navbar__brand" aria-label="Dr. Amit Puri Foundation">
+                <div class="fd-navbar__logo-gem" aria-hidden="true">
+                    <svg width="34" height="34" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="brandGrad" x1="2" y1="2" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                                <stop offset="0%" stop-color="#fbbf24"/>
+                                <stop offset="45%" stop-color="#8b5cf6"/>
+                                <stop offset="100%" stop-color="#06b6d4"/>
+                            </linearGradient>
+                            <radialGradient id="gemInnerGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#070b14" stop-opacity="0.1"/>
+                            </radialGradient>
+                        </defs>
+                        <circle cx="18" cy="18" r="16" fill="url(#gemInnerGlow)" stroke="url(#brandGrad)" stroke-width="1.75"/>
+                        <!-- Stylized A + P + Resonance Wave -->
+                        <path d="M12 25L18 11L24 25" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14.5 20H21.5" stroke="url(#brandGrad)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="18" cy="11" r="2.2" fill="#fbbf24"/>
+                    </svg>
+                </div>
+                <div class="fd-navbar__brand-text">
+                    <span class="fd-navbar__brand-name">Dr. Amit Puri</span>
+                    <span class="fd-navbar__brand-sub">Foundation</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <ul class="fd-navbar__links" id="fd-nav-links" role="list">
+                <li><a href="/#mission"
+                    class="fd-navbar__link">Mission</a></li>
+                <li><a href="/pillars/"
+                    class="fd-navbar__link">Six Pillars</a></li>
+                <li><a href="/framework/#theory"
+                    class="fd-navbar__link"
+                    data-nav-page="framework" data-nav-hash="theory">Ingenuity Ladder</a></li>                
+                <li><a href="/research/"
+                    class="fd-navbar__link"
+                    data-nav-page="research" data-nav-hash="">Research &amp; Publications</a></li>
+                <li><a href="/ecosystem/"
+                    class="fd-navbar__link"
+                    data-nav-page="ecosystem" data-nav-hash="">Ecosystem</a></li>
+                <li><a href="/about/#contact"
+                    class="fd-navbar__link fd-navbar__link--cta">
+                    <span>Collaborate</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a></li>
+            </ul>
+
+        <!-- Hamburger -->
+        <button class="fd-navbar__hamburger" id="fd-hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="fd-nav-links">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+<!-- Mobile Drawer Backdrop Overlay -->
+<div class="fd-navbar__backdrop" id="fd-navbar-backdrop" aria-hidden="true"></div>
+</header>
+<script>
+(function () {
+  // Default hash when no fragment is present, per page group
+  var groupDefaults = { framework: 'theory', ecosystem: '' };
+
+  function updateNav() {
+    var path = window.location.pathname;
+    var hash = window.location.hash.replace('#', '');
+
+    // Which group?
+    var pageGroup = null;
+    if (path.indexOf('/framework') !== -1) pageGroup = 'framework';
+    else if (path.indexOf('/ecosystem') !== -1) pageGroup = 'ecosystem';
+    if (!pageGroup) return;
+
+    // If no hash in URL, use the group's default
+    var activeHash = hash || groupDefaults[pageGroup];
+
+    // Clear existing active from all hash-driven links
+    document.querySelectorAll('[data-nav-page]').forEach(function (a) {
+      a.classList.remove('fd-navbar__link--active');
+    });
+
+    // Set active on the exact match only
+    var matched = null;
+    document.querySelectorAll('[data-nav-page="' + pageGroup + '"]').forEach(function (a) {
+      if (a.dataset.navHash === activeHash) matched = a;
+    });
+    if (matched) matched.classList.add('fd-navbar__link--active');
+  }
+
+  // Run on load and on every hash change (e.g. clicking same-page anchor links)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNav);
+  } else {
+    updateNav();
+  }
+  window.addEventListener('hashchange', updateNav);
+})();
+</script>
+
+    <main id="main-content" role="main">
+        
+<section class="fd-page-hero" aria-label="Hybrid Search & RAG Architecture page banner">
+    <div class="fd-page-hero__glow fd-page-hero__glow--amber" aria-hidden="true"></div>
+    <div class="fd-page-hero__glow fd-page-hero__glow--violet" aria-hidden="true"></div>
+
+    <div class="fd-container fd-page-hero__container">
+        <!-- Breadcrumb -->
+        <nav class="fd-page-hero__breadcrumb" aria-label="Breadcrumb">
+            <a href="/" class="fd-page-hero__breadcrumb-home">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+            </a>
+            
+            <i class="fas fa-chevron-right fd-page-hero__breadcrumb-sep" aria-hidden="true"></i>
+            <span class="fd-page-hero__breadcrumb-current">Hybrid Search & RAG Architecture</span>
+        </nav>
+
+        <div class="fd-page-hero__content">
+            <div class="fd-page-hero__eyebrow" data-animate="fade-up">
+                
+                <i class="fas fa-network-wired" aria-hidden="true"></i>
+                
+                <span>Empirical Information Retrieval & Systems Architecture Research</span>
+            </div>
+            <h1 class="fd-page-hero__title" data-animate="fade-up" data-delay="80">Hybrid Search & RAG Architecture</h1>
+            
+            <p class="fd-page-hero__desc" data-animate="fade-up" data-delay="160">
+                A systematic empirical comparison of 18 retrieval strategies, multi-hop reasoning dynamics, factorial Graph-RAG ablation, and calibrated confidence across 44 scientific papers and 9,558 chunks.
+            </p>
+            
+        </div>
+    </div>
+</section>
+
+
+<section class="fd-article-section" aria-label="Research Publication Details">
+    <div class="fd-container">
+
+        <!-- Author & Research Publication Header Meta Bar -->
+        <div class="fd-research-meta-bar" data-animate="fade-up">
+            <div class="fd-meta-author-wrap">
+                <img src="/assets/avatar/amitpuri-avatar.svg" alt="Dr. Amit Puri"
+                    class="fd-meta-avatar" width="48" height="48">
+                <div class="fd-meta-author-info">
+                    <div class="fd-meta-author-name">
+                        <span>Dr. Amit Puri</span>
+                        <i class="fas fa-certificate" style="color: var(--fd-gold-light); font-size: 0.85rem;"
+                            title="Enterprise AI & Cloud Architect"></i>
+                    </div>
+                    <span class="fd-meta-author-title">Enterprise AI &amp; Cloud Architect · Published Author ·
+                        Researcher</span>
+                </div>
+            </div>
+
+            <div class="fd-meta-badges-wrap">
+                <a href="https://go.dramitpurifoundation.org/Hybrid-Search-researchpaper" target="_blank"
+                    rel="noopener noreferrer" class="fd-meta-badge fd-meta-badge--emerald"
+                    title="Read Official Research Paper">
+                    <i class="fas fa-file-lines" aria-hidden="true"></i>
+                    <span>Read Research Paper</span>
+                    <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.72rem;"></i>
+                </a>
+                <span class="fd-meta-badge fd-meta-badge--violet">
+                    <i class="fas fa-microscope" aria-hidden="true"></i>
+                    <span>18 Retrieval Strategies</span>
+                </span>
+                <span class="fd-meta-badge fd-meta-badge--cyan">
+                    <i class="fas fa-cubes-stacked" aria-hidden="true"></i>
+                    <span>9,558 Structured Chunks</span>
+                </span>
+                <a href="https://go.dramitpurifoundation.org/Hybrid-Search-Repo" target="_blank"
+                    rel="noopener noreferrer" class="fd-meta-badge fd-meta-badge--gold"
+                    title="Open Source GitHub Repository">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                    <span>GitHub Open Source</span>
+                    <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.72rem;"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Telemetry HUD Chips Grid -->
+        <div class="fd-research-hud" data-animate="fade-up">
+            <!-- HUD 1 -->
+            <div class="fd-hud-item" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-sitemap fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill"
+                        style="color: var(--fd-emerald); border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.15);">Configurations</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--emerald">18</span>
+                <span class="fd-hud-label">Retrieval Strategies</span>
+                <span class="fd-hud-desc">15 core architectures plus 3 factorial ablation cells evaluated</span>
+            </div>
+
+            <!-- HUD 2 -->
+            <div class="fd-hud-item" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-database fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill"
+                        style="color: var(--fd-cyan-light); border-color: rgba(6,182,212,0.3); background: rgba(6,182,212,0.15);">Corpus
+                        Scale</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--cyan">9,558</span>
+                <span class="fd-hud-label">Structured Chunks</span>
+                <span class="fd-hud-desc">44 arXiv CS &amp; AI preprints comprising 1,709 pages in Parquet &amp;
+                    Qdrant</span>
+            </div>
+
+            <!-- HUD 3 -->
+            <div class="fd-hud-item" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-brain fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill">Multi-Hop Ceiling</span>
+                </div>
+                <span class="fd-hud-val fd-hud-val--violet">0.833</span>
+                <span class="fd-hud-label">Recall@5 Multi-Hop</span>
+                <span class="fd-hud-desc">Cross-Encoder joint attention achieves 0.408 MRR &amp; 0.513 NDCG@5 on
+                    reasoning</span>
+            </div>
+
+            <!-- HUD 4 -->
+            <div class="fd-hud-item" style="--card-accent: #f59e0b; --card-accent-rgb: 245, 158, 11;">
+                <div class="fd-hud-item__glow"></div>
+                <div class="fd-hud-item__header">
+                    <i class="fas fa-circle-nodes fd-hud-icon" aria-hidden="true"></i>
+                    <span class="fd-hud-pill"
+                        style="color: var(--fd-gold-light); border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.15);">Graph
+                        Coverage</span>
+                </div>
+                <span class="fd-hud-val">0.902</span>
+                <span class="fd-hud-label">Entity Coverage</span>
+                <span class="fd-hud-desc">1-hop NetworkX knowledge graph with IDF weighting delivers 0.727 RelCov</span>
+            </div>
+        </div>
+
+        <div class="fd-article-layout">
+            <!-- Sticky Sidebar Navigation with Scrollspy -->
+            <aside class="fd-article-sidebar" aria-label="Table of Contents">
+                <div class="fd-sidebar-title">
+                    <i class="fas fa-list-check" aria-hidden="true"></i>
+                    <span>Research Index</span>
+                </div>
+                <ul class="fd-sidebar-toc" id="article-toc">
+                    <li><a href="#executive-summary"><span class="fd-toc-num">01</span><span>Executive
+                                Summary</span></a></li>
+                    <li><a href="#core-questions"><span class="fd-toc-num">02</span><span>8 Research
+                                Questions</span></a></li>
+                    <li><a href="#system-architecture"><span class="fd-toc-num">03</span><span>3-Pipeline
+                                Architecture</span></a></li>
+                    <li><a href="#retrieval-strategies"><span class="fd-toc-num">04</span><span>18 Strategy
+                                Matrix</span></a></li>
+                    <li><a href="#benchmark-results"><span class="fd-toc-num">05</span><span>Full Benchmark
+                                Results</span></a></li>
+                    <li><a href="#multi-hop-discovery"><span class="fd-toc-num">06</span><span>Multi-Hop
+                                Reasoning</span></a></li>
+                    <li><a href="#graph-rag-ablation"><span class="fd-toc-num">07</span><span>Factorial
+                                Graph-RAG</span></a></li>
+                    <li><a href="#hnsw-ann-parity"><span class="fd-toc-num">08</span><span>Qdrant HNSW ANN</span></a>
+                    </li>
+                    <li><a href="#calibrated-confidence"><span class="fd-toc-num">09</span><span>Calibrated
+                                Confidence</span></a></li>
+                    <li><a href="#citation-resources"><span class="fd-toc-num">10</span><span>Reproduction &amp;
+                                Citation</span></a></li>
+                </ul>
+
+                <div class="fd-sidebar-actions">
+                    <a href="https://go.dramitpurifoundation.org/Hybrid-Search-Repo" target="_blank"
+                        rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--gold">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <span>GitHub Repository</span>
+                    </a>
+                    <a href="https://go.dramitpurifoundation.org/Hybrid-Search-researchpaper" target="_blank"
+                        rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--outline">
+                        <i class="fas fa-file-lines" aria-hidden="true"></i>
+                        <span>Read Paper (Markdown)</span>
+                    </a>
+                    <a href="/research/cloud-transformation-lcnc/" class="fd-btn fd-btn--sm fd-btn--violet">
+                        <i class="fas fa-cloud-arrow-up" aria-hidden="true"></i>
+                        <span>LCNC Cloud Research</span>
+                    </a>
+                    <a href="/research/code-smells-microservices-vs-monoliths/" class="fd-btn fd-btn--sm fd-btn--cyan">
+                        <i class="fas fa-code-compare" aria-hidden="true"></i>
+                        <span>Code Smells Study</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Research Article Body -->
+            <article class="fd-article-body">
+                <!-- Section 01: Executive Summary -->
+                <section class="fd-article-block" id="executive-summary" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-magnifying-glass-chart"
+                                aria-hidden="true"></i></span>
+                        <span>01. Executive Summary &amp; Core Insight</span>
+                    </h2>
+                    <p class="fd-article-lead">
+                        Teams building retrieval-augmented generation (RAG) systems over scientific and technical
+                        literature must choose among sparse, dense, fusion, graph-augmented, and
+                        approximate-nearest-neighbor retrieval strategies — a choice that is frequently made by
+                        assumption rather than by measurement.
+                    </p>
+                    <p class="fd-article-p">
+                        This empirical systems study by <strong>Dr. Amit Puri</strong> presents an empirical comparison
+                        of <strong>eighteen retrieval strategies</strong> (fifteen core architectures plus three
+                        factorial ablation configurations) evaluated on an expanded corpus of scientific PDF documents
+                        (<strong>44 arXiv-style papers, 1,709 pages, 9,558 structured chunks</strong>) across 22 curated
+                        benchmark queries (16 single-hop + 6 multi-hop reasoning) with explicit chunk-level ground truth
+                        and entity/relation annotations.
+                    </p>
+
+                    <div class="fd-article-callout fd-article-callout--emerald">
+                        <div class="fd-callout-title" style="display: flex; align-items: center; gap: 0.6rem; color: #34d399; font-weight: 700; margin-bottom: 1rem; font-size: 1.08rem;">
+                            <i class="fas fa-key" aria-hidden="true"></i>
+                            <span>Seven Principal Empirical Findings</span>
+                        </div>
+                        <ul class="fd-findings-list">
+                            <li><strong>1. Lexical precision dominates on domain jargon:</strong> Pure BM25 (<code>MRR = 0.551</code>) outperforms all linear hybrid score blends (&alpha; &isin; {0.3, 0.5, 0.7}, MRR range 0.471&ndash;0.503), with retrieval quality degrading monotonically as dense score weight increases.</li>
+                            <li><strong>2. Rank-space fusion prevents score distortion:</strong> Reciprocal Rank Fusion (RRF, <code>k=60</code>) achieves <code>MRR = 0.514</code> and <code>Recall@1 = 0.318</code>, substantially outperforming dense bi-encoders and mitigating the score-incompatibility penalty of linear combinations.</li>
+                            <li><strong>3. Multi-hop reasoning requires joint cross-attention:</strong> While cross-encoder reranking underperforms first-stage RRF on single-hop lexical queries due to web-passage training divergence (0.481 vs. 0.514 overall MRR), it establishes the benchmark ceiling on complex multi-hop reasoning queries (<strong>MRR = 0.408, NDCG@5 = 0.513, Recall@5 = 0.833</strong> vs. RRF's 0.345 MRR).</li>
+                            <li><strong>4. Knowledge graph augmentation delivers structural coverage:</strong> Fusing an IDF-weighted NetworkX knowledge graph into RRF achieves high structural entity and relation coverage (<strong>EntCov = 0.902, RelCov = 0.727</strong>) and competitive ranking (<code>MRR = 0.477, NDCG@5 = 0.528</code>).</li>
+                            <li><strong>5. MMR diversification balances context quality:</strong> Post-deduplication Maximal Marginal Relevance (&lambda; = 0.7) achieves the highest ranking quality with diversity (<strong>NDCG@5 = 0.547</strong>).</li>
+                            <li><strong>6. HNSW ANN vector retrieval is near-lossless at scale:</strong> Approximate Nearest Neighbor retrieval via Qdrant's HNSW index reproduces exact-search bi-encoder metrics identically (<code>MRR = 0.318, NDCG@5 = 0.335</code>), confirming sub-millisecond scalability without sacrificing fidelity.</li>
+                            <li><strong>7. Off-the-shelf dense bi-encoders diffuse coined technical vocabulary:</strong> Standard embeddings (<code>all-MiniLM-L6-v2</code>: 0.318 MRR) and standalone scientific bi-encoders (<code>SPECTER2</code>: 0.278 MRR) struggle on coined acronyms (<em>"StarShell"</em>, <em>"POMDP"</em>, <em>"AgentRunner"</em>) without lexical grounding.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Section 02: 8 Research Questions -->
+                <section class="fd-article-block" id="core-questions" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-clipboard-question"
+                                aria-hidden="true"></i></span>
+                        <span>02. The Eight Research Questions (RQ1–RQ8)</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        To systematically evaluate retrieval and generation behavior, the study formulates eight
+                        falsifiable research questions spanning sparse vs. dense representations, fusion mathematics,
+                        reasoning topologies, and confidence estimation:
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-font"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ1: Sparse vs. Dense Baselines</h3>
+                            <p class="fd-matrix-card__desc">How do pure sparse (BM25), vector-space (TF-IDF), and pure
+                                neural dense bi-encoders (MiniLM, SPECTER2) compare on MRR, Recall@{1,3,5}, and NDCG@5?
+                            </p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #f59e0b; --card-accent-rgb: 245, 158, 11;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-sliders"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ2: Linear Convex Score Fusion</h3>
+                            <p class="fd-matrix-card__desc">Does linear score-level fusion improve retrieval quality
+                                over sparse retrieval alone at any evaluated &alpha; weighting (0.3, 0.5, 0.7)?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-layer-group"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ3: Rank-Based Fusion &amp; MMR</h3>
+                            <p class="fd-matrix-card__desc">Does rank-based fusion (RRF) avoid score degradation, and
+                                how do Jaccard deduplication and MMR diversification alter ranking diversity?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-arrows-split-up-and-left"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ4: Cross-Encoder Division of Labor</h3>
+                            <p class="fd-matrix-card__desc">How does cross-encoder reranking diverge between single-hop
+                                lexical queries and complex multi-hop reasoning queries?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #ec4899; --card-accent-rgb: 236, 72, 153;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-circle-nodes"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ5: Knowledge Graph Augmentation</h3>
+                            <p class="fd-matrix-card__desc">What does fusing an IDF-weighted knowledge-graph
+                                entity/relation signal into RRF change in IR metrics and structural concept coverage?
+                            </p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #6366f1; --card-accent-rgb: 99, 102, 241;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-table-cells"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ6: Factorial Ablation Contributions</h3>
+                            <p class="fd-matrix-card__desc">What are the isolated marginal contributions of Graph
+                                traversal, Deduplication, and MMR when evaluated through a full factorial design?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #14b8a6; --card-accent-rgb: 20, 184, 166;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-bolt"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ7: ANN Vector Indexing Parity</h3>
+                            <p class="fd-matrix-card__desc">Does an HNSW-based approximate nearest neighbor index
+                                (Qdrant) reproduce exact-search dense retrieval fidelity at scale?</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #eab308; --card-accent-rgb: 234, 179, 8;">
+                            <div class="fd-matrix-card__icon-wrap"><i class="fas fa-certificate"></i></div>
+                            <h3 class="fd-matrix-card__title">RQ8: Calibrated Confidence (C3)</h3>
+                            <p class="fd-matrix-card__desc">How can retrieval-native signals (rank, fusion score,
+                                lexical overlap) be leveraged for calibrated confidence estimation without auxiliary LLM
+                                latency?</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 03: 3-Pipeline System Architecture -->
+                <section class="fd-article-block" id="system-architecture" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-diagram-project" aria-hidden="true"></i></span>
+                        <span>03. Decoupled 3-Pipeline System Architecture</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        The architecture is engineered around three strictly decoupled pipelines:
+                        <strong>Ingestion</strong>, <strong>Retrieval</strong>, and <strong>Generation</strong>,
+                        communicating through strongly-typed schemas and persistent state caches.
+                    </p>
+
+                    <div class="fd-table-wrapper" style="margin: 1.5rem 0;">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>Pipeline Stage</th>
+                                    <th>Core Responsibilities</th>
+                                    <th>Architectural Components &amp; Tooling</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Ingestion Pipeline</strong></td>
+                                    <td>Multi-backend extraction, sentence-aware chunking preserving section headings,
+                                        parameter-hash drift detection, heuristic knowledge-graph entity extraction, and
+                                        dual storage persistence.</td>
+                                    <td>
+                                        • <code>pypdfium2</code> (primary), <code>pdfplumber</code> (tables),
+                                        <code>pypdf</code> (fallback)<br>
+                                        • Structured chunker (<code>max_words=200, overlap_sentences=1</code>)<br>
+                                        • SHA-256 parameter state cache (<code>.cache/</code>)<br>
+                                        • NetworkX knowledge graph with IDF-weighted degree activation<br>
+                                        • Partitioned Apache Parquet &amp; Qdrant vector database
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Retrieval Pipeline</strong></td>
+                                    <td>Unified strategy dispatch across 18 configurations, candidate generation, score
+                                        normalization, rank fusion, wide-pool cross-encoder reranking, and diversity
+                                        postprocessing.</td>
+                                    <td>
+                                        • Sparse: <code>rank-bm25</code> (BM25Okapi), <code>scikit-learn</code>
+                                        TF-IDF<br>
+                                        • Distributional: Zero-dependency PPMI matrix factorization<br>
+                                        • Dense: <code>all-MiniLM-L6-v2</code> &amp; <code>specter2_base</code> +
+                                        proximity adapter<br>
+                                        • Cross-Encoder: <code>ms-marco-MiniLM-L-6-v2</code> (top-50 pool)<br>
+                                        • Graph: 1-hop traversal with Louvain community detection fallback<br>
+                                        • Fusion: Convex combination &amp; Reciprocal Rank Fusion
+                                        (<code>k=60</code>)<br>
+                                        • Postprocessing: Sliding-window Jaccard dedup &amp; MMR (&lambda;=0.7)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Generation Pipeline</strong></td>
+                                    <td>Provenance-injected context formatting, grounding-constrained prompt
+                                        construction, multi-provider frontier LLM routing, token bucket rate limiting,
+                                        and Per-Claim Calibrated Confidence (C3).</td>
+                                    <td>
+                                        • Context builder with <code>[Source N: doc.pdf | Page P | § Section]</code><br>
+                                        • Provider adapters: OpenAI (<code>gpt-5.5</code>), Anthropic
+                                        (<code>claude-sonnet-5</code>), Google Gemini
+                                        (<code>gemini-3.8-flash</code>)<br>
+                                        • Dual-metered <code>TokenBucket</code> client-side rate limiting<br>
+                                        • Per-Claim Calibrated Confidence (C3) triaging (HIGH / MED / LOW)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 04: 18 Retrieval Strategies Matrix -->
+                <section class="fd-article-block" id="retrieval-strategies" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-layer-group" aria-hidden="true"></i></span>
+                        <span>04. The 18 Evaluated Retrieval Strategies</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        All 18 strategies execute through a unified dispatch interface
+                        (<code>get_strategy_rankings</code>), ensuring identical candidate evaluation environments:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Strategy Alias</th>
+                                    <th>Mechanism</th>
+                                    <th>Key Architectural Parameters</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td><code>bm25</code></td>
+                                    <td>Okapi BM25 sparse keyword matching</td>
+                                    <td>k1 = 1.5, b = 0.75</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td><code>tfidf</code></td>
+                                    <td>Sublinear TF-IDF vector space with cosine similarity</td>
+                                    <td>sublinear_tf = True</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td><code>linear_0.3</code></td>
+                                    <td>Convex combination of normalized BM25 &amp; TF-IDF</td>
+                                    <td>&alpha; = 0.3 (sparse-heavy)</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td><code>linear_0.5</code></td>
+                                    <td>Convex combination of normalized BM25 &amp; TF-IDF</td>
+                                    <td>&alpha; = 0.5 (equal blend)</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td><code>linear_0.7</code></td>
+                                    <td>Convex combination of normalized BM25 &amp; TF-IDF</td>
+                                    <td>&alpha; = 0.7 (dense-heavy)</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td><code>rrf</code></td>
+                                    <td>Reciprocal Rank Fusion of BM25 + TF-IDF</td>
+                                    <td>k = 60</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td><code>rrf_dedup</code></td>
+                                    <td>RRF followed by Jaccard sliding-window deduplication</td>
+                                    <td>threshold = 0.65</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td><code>rrf_dedup_mmr</code></td>
+                                    <td>Deduplicated RRF re-ranked by Maximal Marginal Relevance</td>
+                                    <td>&lambda; = 0.7, top_k = 5</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td><code>ppmi</code></td>
+                                    <td>Zero-dependency PPMI distributional co-occurrence fused with BM25</td>
+                                    <td>window = 5, vocab = 1500</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td><code>cross_encoder</code></td>
+                                    <td><code>ms-marco-MiniLM-L-6-v2</code> re-ranks wide candidate pool</td>
+                                    <td>pool_size = 50</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td><code>sentence_transformer</code></td>
+                                    <td><code>all-MiniLM-L6-v2</code> dense bi-encoder with cosine similarity</td>
+                                    <td>384 dimensions</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td><code>adaptive</code></td>
+                                    <td>Query-intent heuristic dynamic &alpha; weighting</td>
+                                    <td>Rule-based intent classifier</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td><code>specter2</code></td>
+                                    <td><code>allenai/specter2_base</code> with proximity adapter &amp; CLS pooling</td>
+                                    <td>Asymmetric query adapter</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td><code>rrf_graph_dedup_mmr</code></td>
+                                    <td>BM25 + TF-IDF + 1-hop NetworkX Graph fused via RRF &rarr; Dedup &rarr; MMR</td>
+                                    <td>IDF-weighted entity activation</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td><code>qdrant</code></td>
+                                    <td>Approximate Nearest Neighbor vector search on Qdrant HNSW index</td>
+                                    <td>HNSW M=16, ef=100</td>
+                                </tr>
+                                <tr>
+                                    <td>A</td>
+                                    <td><code>graph_only</code></td>
+                                    <td>Standalone 1-hop NetworkX graph traversal with IDF activation</td>
+                                    <td>Isolates standalone KG signal</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td><code>rrf_graph</code></td>
+                                    <td>RRF fusing BM25 + TF-IDF + Knowledge Graph (no dedup, no MMR)</td>
+                                    <td>Isolates raw graph fusion</td>
+                                </tr>
+                                <tr>
+                                    <td>C</td>
+                                    <td><code>rrf_graph_dedup</code></td>
+                                    <td>RRF + Knowledge Graph + Jaccard Dedup (no MMR)</td>
+                                    <td>Isolates Dedup without MMR</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 05: Comprehensive Benchmark Results -->
+                <section class="fd-article-block" id="benchmark-results" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-chart-column" aria-hidden="true"></i></span>
+                        <span>05. Comprehensive Quantitative Benchmark Results</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        Evaluated across <strong>22 queries, 44 scientific documents, and 9,558 structured
+                            chunks</strong>. Ground truth is defined as a target chunk index per query complemented by
+                        curated target entity and relation lists:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Strategy Name</th>
+                                    <th>MRR</th>
+                                    <th>Recall@1</th>
+                                    <th>Recall@3</th>
+                                    <th>Recall@5</th>
+                                    <th>NDCG@5</th>
+                                    <th>EntCov</th>
+                                    <th>RelCov</th>
+                                    <th>Key Characteristic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(16, 185, 129, 0.08);">
+                                    <td><strong>1</strong></td>
+                                    <td><strong>Pure BM25 (Sparse)</strong></td>
+                                    <td><strong style="color: #34d399;">0.551</strong></td>
+                                    <td><strong style="color: #34d399;">0.364</strong></td>
+                                    <td>0.727</td>
+                                    <td>0.773</td>
+                                    <td><strong style="color: #34d399;">0.589</strong></td>
+                                    <td>0.902</td>
+                                    <td>0.727</td>
+                                    <td>Exceptional keyword precision on domain jargon</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Pure TF-IDF (Sparse Vector)</td>
+                                    <td>0.337</td>
+                                    <td>0.136</td>
+                                    <td>0.409</td>
+                                    <td>0.591</td>
+                                    <td>0.373</td>
+                                    <td>0.826</td>
+                                    <td>0.636</td>
+                                    <td>Sparse vector space baseline with sublinear TF</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Linear Hybrid (&alpha;=0.3)</td>
+                                    <td>0.503</td>
+                                    <td>0.273</td>
+                                    <td>0.682</td>
+                                    <td>0.773</td>
+                                    <td>0.556</td>
+                                    <td>0.902</td>
+                                    <td>0.727</td>
+                                    <td>Best linear blend; strongly weights sparse signal</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Linear Hybrid (&alpha;=0.5)</td>
+                                    <td>0.503</td>
+                                    <td>0.273</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>0.773</td>
+                                    <td>0.558</td>
+                                    <td>0.886</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>Equal convex score combination</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Linear Hybrid (&alpha;=0.7)</td>
+                                    <td>0.471</td>
+                                    <td>0.273</td>
+                                    <td>0.727</td>
+                                    <td>0.773</td>
+                                    <td>0.535</td>
+                                    <td>0.871</td>
+                                    <td>0.727</td>
+                                    <td>Dense-heavy blend; degraded by dense score noise</td>
+                                </tr>
+                                <tr style="background: rgba(139, 92, 246, 0.08);">
+                                    <td><strong>6</strong></td>
+                                    <td><strong>RRF (k=60)</strong></td>
+                                    <td><strong>0.514</strong></td>
+                                    <td>0.318</td>
+                                    <td>0.727</td>
+                                    <td>0.773</td>
+                                    <td>0.566</td>
+                                    <td>0.856</td>
+                                    <td>0.682</td>
+                                    <td>Rank-space fusion immune to score-scale distortion</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>RRF + Deduplication</td>
+                                    <td>0.477</td>
+                                    <td>0.318</td>
+                                    <td>0.636</td>
+                                    <td>0.682</td>
+                                    <td>0.521</td>
+                                    <td>0.856</td>
+                                    <td>0.682</td>
+                                    <td>Eliminates redundant sliding-window chunk overlap</td>
+                                </tr>
+                                <tr style="background: rgba(6, 182, 212, 0.08);">
+                                    <td><strong>8</strong></td>
+                                    <td><strong>RRF + Dedup + MMR</strong></td>
+                                    <td>0.486</td>
+                                    <td>0.318</td>
+                                    <td>0.682</td>
+                                    <td>0.727</td>
+                                    <td><strong>0.547</strong></td>
+                                    <td>0.902</td>
+                                    <td>0.727</td>
+                                    <td>Top ranking diversity via MMR (&lambda;=0.7)</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>PPMI Semantic + BM25 RRF</td>
+                                    <td>0.373</td>
+                                    <td>0.182</td>
+                                    <td>0.455</td>
+                                    <td>0.591</td>
+                                    <td>0.401</td>
+                                    <td>0.856</td>
+                                    <td>0.727</td>
+                                    <td>Distributional co-occurrence semantics from scratch</td>
+                                </tr>
+                                <tr style="background: rgba(245, 158, 11, 0.08);">
+                                    <td><strong>10</strong></td>
+                                    <td><strong>Cross-Encoder Re-rank</strong></td>
+                                    <td>0.481</td>
+                                    <td>0.318</td>
+                                    <td>0.591</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>0.549</td>
+                                    <td>0.902</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>Re-ranks 50 un-deduplicated candidates via MS MARCO</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Sentence-Transformer (MiniLM)</td>
+                                    <td>0.318</td>
+                                    <td>0.182</td>
+                                    <td>0.364</td>
+                                    <td>0.500</td>
+                                    <td>0.335</td>
+                                    <td>0.818</td>
+                                    <td>0.682</td>
+                                    <td>Pure dense bi-encoder; diffuses coined technical terms</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Adaptive Hybrid</td>
+                                    <td>0.491</td>
+                                    <td>0.273</td>
+                                    <td>0.682</td>
+                                    <td>0.727</td>
+                                    <td>0.533</td>
+                                    <td>0.886</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>Dynamic query-intent alpha weighting heuristic</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>SPECTER2 (Scientific Bi-Encoder)</td>
+                                    <td>0.278</td>
+                                    <td>0.136</td>
+                                    <td>0.364</td>
+                                    <td>0.500</td>
+                                    <td>0.327</td>
+                                    <td>0.871</td>
+                                    <td>0.682</td>
+                                    <td>Domain-adapted SciBERT with dual proximity adapters</td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.08);">
+                                    <td><strong>14</strong></td>
+                                    <td><strong>RRF + Graph + Dedup + MMR</strong></td>
+                                    <td>0.477</td>
+                                    <td><strong style="color: #34d399;">0.364</strong></td>
+                                    <td>0.591</td>
+                                    <td>0.682</td>
+                                    <td>0.528</td>
+                                    <td><strong style="color: #34d399;">0.902</strong></td>
+                                    <td>0.727</td>
+                                    <td>Fuses IDF-weighted NetworkX KG; high structural coverage</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td><strong>Qdrant Vector (ANN)</strong></td>
+                                    <td>0.318</td>
+                                    <td>0.182</td>
+                                    <td>0.364</td>
+                                    <td>0.500</td>
+                                    <td>0.335</td>
+                                    <td>0.818</td>
+                                    <td>0.682</td>
+                                    <td>Sub-millisecond ANN vector search via Qdrant HNSW</td>
+                                </tr>
+                                <tr>
+                                    <td>A</td>
+                                    <td>Ablation: Graph only</td>
+                                    <td>0.106</td>
+                                    <td>0.045</td>
+                                    <td>0.091</td>
+                                    <td>0.273</td>
+                                    <td>0.146</td>
+                                    <td>0.417</td>
+                                    <td>0.273</td>
+                                    <td>Baseline: graph signal alone without lexical/dense fusion</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>Ablation: RRF + Graph</td>
+                                    <td>0.514</td>
+                                    <td><strong style="color: #34d399;">0.364</strong></td>
+                                    <td>0.636</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>0.565</td>
+                                    <td>0.871</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>Isolates raw graph contribution to RRF fusion</td>
+                                </tr>
+                                <tr>
+                                    <td>C</td>
+                                    <td>Ablation: RRF + Graph + Dedup</td>
+                                    <td>0.477</td>
+                                    <td><strong style="color: #34d399;">0.364</strong></td>
+                                    <td>0.545</td>
+                                    <td>0.682</td>
+                                    <td>0.519</td>
+                                    <td>0.871</td>
+                                    <td><strong>0.773</strong></td>
+                                    <td>Isolates Dedup contribution on top of graph fusion</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 06: Multi-Hop Reasoning Discovery -->
+                <section class="fd-article-block" id="multi-hop-discovery" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-brain" aria-hidden="true"></i></span>
+                        <span>06. Multi-Hop Reasoning Benchmark &amp; Cross-Encoder Discovery</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        A pivotal empirical finding emerged when isolating the <strong>6 complex multi-hop reasoning
+                            queries</strong> (*"How do POMDP belief states update after receiving new observations"*,
+                        *"What risk-tiering mechanisms does the AgentRunner framework apply"*, *"What market forces
+                        shape the organization and size of AI agent firms"*).
+                    </p>
+                    <p class="fd-article-p">
+                        On multi-hop reasoning, the ranking dynamics completely inverted:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Strategy Name</th>
+                                    <th>MRR</th>
+                                    <th>Recall@1</th>
+                                    <th>Recall@3</th>
+                                    <th>Recall@5</th>
+                                    <th>NDCG@5</th>
+                                    <th>Key Reasoning Advantage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(139, 92, 246, 0.12);">
+                                    <td><strong>10</strong></td>
+                                    <td><strong>Cross-Encoder Re-rank ★</strong></td>
+                                    <td><strong style="color: var(--fd-violet-light);">0.408</strong></td>
+                                    <td>0.167</td>
+                                    <td><strong>0.500</strong></td>
+                                    <td><strong style="color: var(--fd-violet-light);">0.833</strong></td>
+                                    <td><strong style="color: var(--fd-violet-light);">0.513</strong></td>
+                                    <td><strong>Best for multi-hop reasoning via joint token-level
+                                            cross-attention</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Pure BM25 (Sparse)</td>
+                                    <td>0.449</td>
+                                    <td><strong>0.333</strong></td>
+                                    <td><strong>0.500</strong></td>
+                                    <td>0.667</td>
+                                    <td>0.488</td>
+                                    <td>Strong lexical precision on composite query keywords</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>RRF + Dedup + MMR</td>
+                                    <td>0.367</td>
+                                    <td>0.167</td>
+                                    <td><strong>0.500</strong></td>
+                                    <td>0.667</td>
+                                    <td>0.441</td>
+                                    <td>MMR diversifies multi-step evidence chunks</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>RRF (k=60)</td>
+                                    <td>0.345</td>
+                                    <td>0.167</td>
+                                    <td><strong>0.500</strong></td>
+                                    <td>0.500</td>
+                                    <td>0.355</td>
+                                    <td>Pure rank fusion loses precision on relational queries</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>RRF + Graph + Dedup + MMR</td>
+                                    <td>0.306</td>
+                                    <td>0.167</td>
+                                    <td><strong>0.500</strong></td>
+                                    <td>0.500</td>
+                                    <td>0.355</td>
+                                    <td>Structural traversal surfaces broad relational context</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="fd-article-callout fd-article-callout--violet" style="margin-top: 1.5rem;">
+                        <div class="fd-callout-title">
+                            <i class="fas fa-arrows-split-up-and-left" aria-hidden="true"></i>
+                            <span>The Dual-Strategy Architectural Division of Labor</span>
+                        </div>
+                        <p class="fd-callout-desc">
+                            Cross-encoders suffer from domain divergence on single-hop technical definitions because
+                            they were trained on general MS MARCO web queries. However, on complex multi-hop queries,
+                            their joint query-document cross-attention allows them to evaluate relational dependencies
+                            between disparate clauses that bi-encoders and keyword matchers fail to bridge.
+                            <strong>Recommendation:</strong> Use fast sparse/RRF retrieval for direct lookup, and route
+                            multi-hop or inferential queries to cross-encoder rerankers.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Section 07: Factorial Graph-RAG Ablation -->
+                <section class="fd-article-block" id="graph-rag-ablation" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-circle-nodes" aria-hidden="true"></i></span>
+                        <span>07. Factorial Graph-RAG Ablation Analysis</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        To dissect the interaction between knowledge graph traversal, sliding-window deduplication, and
+                        MMR, nine experimental cells were evaluated under identical benchmark queries:
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #f43f5e; --card-accent-rgb: 244, 63, 94;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-ban"
+                                    style="color: var(--fd-rose); margin-right: 0.4rem;"></i> Standalone KG Signal is
+                                Weak</h3>
+                            <p class="fd-matrix-card__desc"><code>graph_only</code> (MRR = 0.106) demonstrates that
+                                entity graph traversal alone cannot replace textual retrieval; it functions as an
+                                associative amplifier, not a primary search engine.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-arrow-up"
+                                    style="color: var(--fd-emerald); margin-right: 0.4rem;"></i> Graph Elevates Top-1
+                                Recall</h3>
+                            <p class="fd-matrix-card__desc">Adding the Knowledge Graph to RRF increases Recall@1 from
+                                0.318 to <strong>0.364</strong> while maintaining 0.514 MRR, proving structural entity
+                                links elevate relevant documents to position #1.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-scissors"
+                                    style="color: var(--fd-cyan-light); margin-right: 0.4rem;"></i> Deduplication
+                                Eliminates Churn</h3>
+                            <p class="fd-matrix-card__desc">Jaccard deduplication prunes adjacent overlapping chunks,
+                                slightly trading raw single-chunk MRR (0.514 &rarr; 0.477) to eliminate redundant tokens
+                                from entering the generation context window.</p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-sparkles"
+                                    style="color: var(--fd-violet-light); margin-right: 0.4rem;"></i> MMR Recovers
+                                Quality</h3>
+                            <p class="fd-matrix-card__desc">Maximal Marginal Relevance lifts NDCG@5 from 0.521 to
+                                <strong>0.547</strong> for non-graph and 0.519 to <strong>0.528</strong> for
+                                graph-augmented pipelines, maximizing informational diversity.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 08: Lossless Qdrant HNSW ANN Vector Parity -->
+                <section class="fd-article-block" id="hnsw-ann-parity" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-bolt" aria-hidden="true"></i></span>
+                        <span>08. Lossless Qdrant HNSW ANN Vector Search Parity</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        Strategy 15 evaluated whether deploying an HNSW approximate nearest neighbor (ANN) vector
+                        database introduces accuracy degradation compared to exact matrix cosine similarity (Strategy
+                        11) on 9,558 chunks:
+                    </p>
+
+                    <div class="fd-table-wrapper">
+                        <table class="fd-table">
+                            <thead>
+                                <tr>
+                                    <th>Evaluation Dimension</th>
+                                    <th>Strategy 11: Exact Bi-Encoder (MiniLM)</th>
+                                    <th>Strategy 15: Qdrant HNSW ANN</th>
+                                    <th>Parity Assessment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Mean Reciprocal Rank (MRR)</strong></td>
+                                    <td>0.318</td>
+                                    <td>0.318</td>
+                                    <td><span class="fd-research-subnav-badge"
+                                            style="background: rgba(16,185,129,0.2); color: #34d399;">100%
+                                            Identical</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Recall@1 / Recall@5</strong></td>
+                                    <td>0.182 / 0.500</td>
+                                    <td>0.182 / 0.500</td>
+                                    <td><span class="fd-research-subnav-badge"
+                                            style="background: rgba(16,185,129,0.2); color: #34d399;">100%
+                                            Identical</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>NDCG@5</strong></td>
+                                    <td>0.335</td>
+                                    <td>0.335</td>
+                                    <td><span class="fd-research-subnav-badge"
+                                            style="background: rgba(16,185,129,0.2); color: #34d399;">100%
+                                            Identical</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Execution Latency &amp; Scaling</strong></td>
+                                    <td>In-memory O(N) linear brute-force scan</td>
+                                    <td>Sub-millisecond HNSW graph traversal (M=16, ef=100)</td>
+                                    <td><strong>Production Scalable</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Section 09: Calibrated Confidence (C3) -->
+                <section class="fd-article-block" id="calibrated-confidence" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+                        <span>09. Calibrated Confidence (C3) &amp; Frontier Generation</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        To eliminate hallucination risks without incurring auxiliary LLM inference costs or latency, the
+                        architecture formalizes <strong>Per-Claim Calibrated Confidence (C3)</strong> derived directly
+                        from retrieval-native signals:
+                    </p>
+
+                    <div class="fd-matrix-grid">
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <h3 class="fd-matrix-card__title" style="color: #34d399;"><i
+                                    class="fas fa-circle-check"></i> HIGH Confidence</h3>
+                            <p class="fd-matrix-card__desc">
+                                <code>rank &le; 2 &and; fusion_score &ge; 0.7 &and; lexical_overlap &ge; 0.3</code><br>Direct
+                                citation grounding; zero hesitation in synthetic generation.
+                            </p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #f59e0b; --card-accent-rgb: 245, 158, 11;">
+                            <h3 class="fd-matrix-card__title" style="color: var(--fd-gold-light);"><i
+                                    class="fas fa-triangle-exclamation"></i> MEDIUM Confidence</h3>
+                            <p class="fd-matrix-card__desc">
+                                <code>rank &le; 4 &or; (fusion_score &ge; 0.5 &and; lexical_overlap &ge; 0.2)</code><br>Qualified
+                                claim; passage provided with explicit provenance bracket.
+                            </p>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #f43f5e; --card-accent-rgb: 244, 63, 94;">
+                            <h3 class="fd-matrix-card__title" style="color: var(--fd-rose);"><i
+                                    class="fas fa-circle-xmark"></i> LOW Confidence</h3>
+                            <p class="fd-matrix-card__desc">Fails both criteria; passage flagged as speculative or
+                                discarded before generation to prevent ungrounded hallucinations.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 10: Academic Citation & Resources -->
+                <section class="fd-article-block" id="citation-resources" data-animate="fade-up">
+                    <h2 class="fd-article-heading">
+                        <span class="fd-heading-icon"><i class="fas fa-quote-left" aria-hidden="true"></i></span>
+                        <span>10. Open Source Code &amp; Academic Citation</span>
+                    </h2>
+                    <p class="fd-article-p">
+                        The complete experimental suite, evaluation benchmarks, ingestion engines, and retrieval
+                        strategies are open source on GitHub:
+                    </p>
+
+                    <div class="fd-citation-box">
+                        <div id="citation-text">
+                            <strong>Puri, A. (2025).</strong> <em>Hybrid Retrieval Strategies for Retrieval-Augmented
+                                Generation over Scientific PDF Corpora: An Empirical Comparison.</em> Systems &amp;
+                            Empirical Information Retrieval Research. GitHub:
+                            https://go.dramitpurifoundation.org/Hybrid-Search-Repo
+                        </div>
+                        <button class="fd-btn fd-btn--sm fd-btn--outline fd-citation-copy-btn" id="copy-citation-btn"
+                            onclick="copyCitation()">
+                            <i class="fas fa-copy" aria-hidden="true"></i>
+                            <span id="copy-btn-text">Copy APA Citation</span>
+                        </button>
+                    </div>
+
+                    <div class="fd-matrix-grid" style="margin-top: 2.25rem;">
+                        <div class="fd-matrix-card" style="--card-accent: #10b981; --card-accent-rgb: 16, 185, 129;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-file-lines"
+                                    style="color: #34d399; margin-right: 0.4rem;"></i> Full Research Paper
+                            </h3>
+                            <p class="fd-matrix-card__desc">Read the complete empirical research paper covering all 18
+                                retrieval strategies, mathematical formulations, and evaluation telemetry.</p>
+                            <a href="https://go.dramitpurifoundation.org/Hybrid-Search-researchpaper" target="_blank"
+                                rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--gold"
+                                style="margin-top: auto;">
+                                <span>Read Research Paper</span>
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <h3 class="fd-matrix-card__title"><i class="fab fa-github"
+                                    style="color: var(--fd-cyan-light); margin-right: 0.4rem;"></i> GitHub Open Source
+                            </h3>
+                            <p class="fd-matrix-card__desc">Access the Python package, CLI tools, evaluation benchmark
+                                scripts, and reproduction guides.</p>
+                            <a href="https://go.dramitpurifoundation.org/Hybrid-Search-Repo" target="_blank"
+                                rel="noopener noreferrer" class="fd-btn fd-btn--sm fd-btn--outline"
+                                style="margin-top: auto;">
+                                <span>Explore on GitHub</span>
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #8b5cf6; --card-accent-rgb: 139, 92, 246;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-cloud-arrow-up"
+                                    style="color: var(--fd-violet-light); margin-right: 0.4rem;"></i> Companion Doctoral
+                                Study</h3>
+                            <p class="fd-matrix-card__desc">Explore the complementary doctoral research (DBA Data
+                                Science) on Cloud Transformation Challenges &amp; Low-Code platforms.</p>
+                            <a href="/research/cloud-transformation-lcnc/" class="fd-btn fd-btn--sm fd-btn--violet"
+                                style="margin-top: auto;">
+                                <span>Read LCNC Research</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                        <div class="fd-matrix-card" style="--card-accent: #06b6d4; --card-accent-rgb: 6, 182, 212;">
+                            <h3 class="fd-matrix-card__title"><i class="fas fa-code-compare"
+                                    style="color: var(--fd-cyan-light); margin-right: 0.4rem;"></i> Code Smells in
+                                Microservices</h3>
+                            <p class="fd-matrix-card__desc">Explore the natural-experiment MS in Data Science study
+                                analyzing 754 monolith versions vs. microservices.</p>
+                            <a href="/research/code-smells-microservices-vs-monoliths/"
+                                class="fd-btn fd-btn--sm fd-btn--cyan" style="margin-top: auto;">
+                                <span>Read Code Smells Study</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </div>
+
+    <!-- Section Bottom Link -->
+    <div class="fd-research__bottom-cta" data-animate="fade-up" data-delay="200">
+        <a href="/" class="fd-btn fd-btn--lg fd-btn--violet">
+            <i class="fas fa-home" aria-hidden="true"></i>
+            <span>Back to Home</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+    </div>
+</section>
+
+<!-- Scrollspy & Citation Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // ScrollSpy for Sidebar TOC
+        const tocLinks = document.querySelectorAll('#article-toc a');
+        const sections = document.querySelectorAll('.fd-article-block[id]');
+
+        function onScroll() {
+            let currentId = '';
+            const scrollPosition = window.scrollY + 140;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                if (scrollPosition >= top && scrollPosition < top + height) {
+                    currentId = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('is-active');
+                if (link.getAttribute('href') === '#' + currentId) {
+                    link.classList.add('is-active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    });
+
+    function copyCitation() {
+        const citation = "Puri, A. (2025). Hybrid Retrieval Strategies for Retrieval-Augmented Generation over Scientific PDF Corpora: An Empirical Comparison. Systems & Empirical Information Retrieval Research. GitHub: https://go.dramitpurifoundation.org/Hybrid-Search-Repo";
+        navigator.clipboard.writeText(citation).then(function () {
+            const btnText = document.getElementById('copy-btn-text');
+            btnText.textContent = "Copied to Clipboard!";
+            setTimeout(() => { btnText.textContent = "Copy APA Citation"; }, 2500);
+        });
+    }
+</script>
+    </main>
+    <footer class="fd-footer" role="contentinfo">
+    <div class="fd-container">
+        <div class="fd-footer__grid">
+            <!-- Brand & Mission Column -->
+            <div class="fd-footer__brand-col">
+                <a href="/" class="fd-footer__brand-link" aria-label="Dr. Amit Puri Foundation">
+                    <div class="fd-footer__logo-mark" aria-hidden="true">
+                        <svg width="30" height="30" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="18" cy="18" r="16" stroke="url(#footGrad)" stroke-width="1.75"/>
+                            <path d="M12 25L18 11L24 25" stroke="#f8fafc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14.5 20H21.5" stroke="url(#footGrad)" stroke-width="2" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="footGrad" x1="2" y1="2" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#fbbf24"/>
+                                    <stop offset="50%" stop-color="#8b5cf6"/>
+                                    <stop offset="100%" stop-color="#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="fd-footer__brand-name">
+                        <span>Dr. Amit Puri</span>
+                        <strong>Foundation</strong>
+                    </div>
+                </a>
+                <p class="fd-footer__tagline">
+                    Cultivating Human Ingenuity in the Age of AI
+                </p>
+                <div class="fd-footer__mission-short">
+                    Cultivating human reasoning, creativity, and expression alongside AI across arts, healthcare, education, and robotics.
+                </div>
+            </div>
+
+            <!-- Pillars Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Strategic Pillars</h3>
+                <ul class="fd-footer__nav" role="list">
+                    
+                    <li>
+                        <a href="/pillars/human-skills/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">01</span>
+                            <span>Human Skills Foundation</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/arts-expression/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">02</span>
+                            <span>Arts & Creative Expression</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/human-ai-collab/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">03</span>
+                            <span>Human-AI Collaboration Practice</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/healthcare-research/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">04</span>
+                            <span>Research Acceleration: Medicine & Healthcare</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/education/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">05</span>
+                            <span>Education Transformation</span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/pillars/physical-ai/" class="fd-footer__link">
+                            <span class="fd-footer__link-num">06</span>
+                            <span>Future Skills: Physical AI & Embodied Intelligence</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <!-- Ecosystem Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Affiliated Ecosystem</h3>
+                <ul class="fd-footer__nav" role="list">
+                    
+                    <li>
+                        <a href="https://go.amitpuri.com/home" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Dr. Amit Puri</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.openagistack.com" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>OpenAGI Stack</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://go.theiotworld.io" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>The IoT World</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://www.openagi.news" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>OpenAGI News</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://go.shrimadbhagavadgita.org" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Shrimad Bhagavad Gita</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://designpattern.fyi" target="_blank" rel="noopener noreferrer" class="fd-footer__link">
+                            <span>Design Pattern FYI</span>
+                            <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <!-- Framework & Contact Column -->
+            <div class="fd-footer__col">
+                <h3 class="fd-footer__heading">Framework &amp; Connect</h3>
+                <ul class="fd-footer__nav" role="list">
+                    <li><a href="/framework/#theory" class="fd-footer__link">The Ingenuity Ladder</a></li>
+                    <li><a href="/research" class="fd-footer__link">Research Publications</a></li>
+                    <li><a href="/about/#principles" class="fd-footer__link">Guiding Principles</a></li>
+                    <li><a href="mailto:info@amitpuri.com" class="fd-footer__link"><i class="fas fa-envelope" aria-hidden="true"></i> info@amitpuri.com</a></li>
+                    <li><a href="https://topmate.io/amitpuri" target="_blank" rel="noopener" class="fd-footer__link"><i class="fas fa-calendar-check" aria-hidden="true"></i> Topmate Advisory</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fd-footer__bottom">
+            <div class="fd-footer__copyright">
+                &copy; 2026 Dr. Amit Puri Foundation. Cultivating Human Ingenuity in the Age of AI.
+            </div>
+            <div class="fd-footer__links-bottom">
+                <a href="https://www.openagi.news/privacy/" target="_blank" rel="noopener noreferrer" class="fd-footer__legal-link">Privacy</a>
+                <span class="fd-footer__legal-sep" aria-hidden="true">·</span>
+                <a href="https://www.openagi.news/terms/" target="_blank" rel="noopener noreferrer" class="fd-footer__legal-link">Terms</a>
+                
+                <span class="fd-footer__legal-sep" aria-hidden="true">·</span>
+                <a href="/" class="fd-footer__back-top">
+                    <span>Home</span>
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/assets/js/main.js" defer></script>
+    <!-- Floating Back to Top Button -->
+<a href="#top" id="fd-back-to-top" class="fd-back-to-top" title="Back to top" aria-label="Back to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+</a>
+
+<style>
+    .fd-back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 999;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(6, 182, 212, 0.85));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4), 0 0 15px rgba(6, 182, 212, 0.2);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(16px);
+        transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s ease,
+                    background 0.3s ease;
+        cursor: pointer;
+    }
+
+    .fd-back-to-top.is-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .fd-back-to-top:hover {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 1), rgba(6, 182, 212, 1));
+        box-shadow: 0 6px 25px rgba(139, 92, 246, 0.6), 0 0 20px rgba(6, 182, 212, 0.4);
+        transform: translateY(-3px);
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    .fd-back-to-top:active {
+        transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+        .fd-back-to-top {
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 42px;
+            height: 42px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        var btn = document.getElementById('fd-back-to-top');
+        if (!btn) return;
+
+        function toggleBackToTop() {
+            if (window.scrollY > 300) {
+                btn.classList.add('is-visible');
+            } else {
+                btn.classList.remove('is-visible');
+            }
+        }
+
+        window.addEventListener('scroll', toggleBackToTop, { passive: true });
+        toggleBackToTop();
+
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    })();
+</script>
+<!-- End Floating Back to Top Button -->
+
+</body>
+</html>
